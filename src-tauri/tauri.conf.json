@@ -79,6 +79,10 @@
         "timestampUrl": "",
         "webviewInstallMode": {
           "type": "offlineInstaller"
+        },
+        "wix": {
+          "fragmentPaths": ["./reg.wxs"],
+          "componentRefs": ["MyFragmentRegistryEntries"]
         }
       }
     },

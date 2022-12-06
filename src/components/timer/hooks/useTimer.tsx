@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
 import { getMenuOpen, onSetSettingsDisable } from "@/service/settings";
-
 import sound from "@/assets/sounds/sound.mp3";
 
 interface UseTimerProps {
