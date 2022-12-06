@@ -1,0 +1,44 @@
+@import '@/assets/colors.module.scss';
+
+.wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	column-gap: 5px;
+}
+
+.duration {
+	margin-top: 10px;
+	display: flex;
+	column-gap: 5px;
+	justify-content: center;
+
+	&Layout {
+		row-gap: 5px;
+		text-align: center;
+		display: flex;
+		text-transform: uppercase;
+		flex-direction: column;
+	}
+}
+
+.settings {
+	position: fixed;
+	right: 25px;
+	top: 25px;
+	background: none;
+	font-size: 2em;
+	border: none;
+	color: $text-color;
+	cursor: pointer;
+
+	&Layout {
+		display: flex;
+		flex-direction: column;
+		row-gap: 15px;
+	}
+
+	&:disabled {
+		color: $text-secondary-color;
+	}
+}

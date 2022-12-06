@@ -1,0 +1,29 @@
+@font-face {
+	font-family: 'MontserratRegular';
+	src: url('./fonts/MontserratRegular.eot');
+	src: url('./fonts/MontserratRegular.eot') format('embedded-opentype'),
+			 url('./fonts/MontserratRegular.woff2') format('woff2'),
+			 url('./fonts/MontserratRegular.woff') format('woff'),
+			 url('./fonts/MontserratRegular.ttf') format('truetype'),
+			 url('./fonts/MontserratRegular.svg#MontserratRegular') format('svg');
+}
+
+@font-face {
+	font-family: 'MontserratBold';
+	src: url('./fonts/MontserratBold.eot');
+	src: url('./fonts/MontserratBold.eot') format('embedded-opentype'),
+			 url('./fonts/MontserratBold.woff2') format('woff2'),
+			 url('./fonts/MontserratBold.woff') format('woff'),
+			 url('./fonts/MontserratBold.ttf') format('truetype'),
+			 url('./fonts/MontserratBold.svg#MontserratBold') format('svg');
+}
+
+@font-face {
+	font-family: 'RobotoMonoBold';
+	src: url('./fonts/RobotoMonoBold.eot');
+	src: url('./fonts/RobotoMonoBold.eot') format('embedded-opentype'),
+			 url('./fonts/RobotoMonoBold.woff2') format('woff2'),
+			 url('./fonts/RobotoMonoBold.woff') format('woff'),
+			 url('./fonts/RobotoMonoBold.ttf') format('truetype'),
+			 url('./fonts/RobotoMonoBold.svg#RobotoMonoBold') format('svg');
+}

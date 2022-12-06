@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./toolbar/style.css">
+    <title>Pomodoro</title>
+  </head>
+  <body>
+    <div data-tauri-drag-region class="titlebar">
+      <div class="titlebar-button" id="titlebar-minimize">
+        <img
+          src="https://api.iconify.design/mingcute/minimize-line.svg?color=white"
+          alt="minimize"
+        />
+      </div>
+      <div class="titlebar-button" id="titlebar-maximize">
+        <img src="https://api.iconify.design/tabler/maximize.svg?color=white" alt="maximize">
+      </div>
+      <div class="titlebar-button" id="titlebar-close">
+        <img
+          src="https://api.iconify.design/ph/x-light.svg?color=white"
+          alt="minimize"
+        />
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/toolbar/toolbar.js"></script>
+  </body>
+</html>

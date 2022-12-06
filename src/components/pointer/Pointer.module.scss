@@ -1,0 +1,18 @@
+@import '@/assets/colors.module.scss';
+
+.layout {
+	display: flex;
+	column-gap: 10px;
+	justify-content: center;
+}
+
+.point {
+	width: 15px;
+	height: 15px;
+	background-color: $text-color;
+	border-radius: 50%;
+
+	&Active {
+		background-color: $accent-color;
+	}
+}

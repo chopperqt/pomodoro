@@ -1,0 +1,21 @@
+@import '@/assets/colors.module.scss';
+
+h1, h2, h3, h4, h5, p, span, div {
+	color: $text-primary-color;
+}
+
+.no-click {
+	pointer-events: none;
+}
+
+.text-secondary {
+	color: $light-primary-color;
+}
+
+.text-bold {
+	font-family: 'MontserratBold';
+}
+
+.text-white {
+	color: $text-color;
+}
