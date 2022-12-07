@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
 import { getMenuOpen, onSetSettingsDisable } from "@/service/settings";
+import { StatusList } from "@/helpers/statusList";
+
 import sound from "@/assets/sounds/sound.mp3";
 
 interface UseTimerProps {
@@ -74,7 +76,9 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     if (start) {
       dispatch(onSetSettingsDisable(true));
 
-      invoke("set_icon", { name: "start" });
+      const name = isTimeout.current ? StatusList.timeout : StatusList.start;
+
+      invoke("set_icon", { name });
 
       //@ts-ignore
       tick.current = setInterval(() => {
@@ -83,6 +87,8 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
 
       return;
     }
+
+    invoke("set_icon", { name: StatusList.pause });
 
     dispatch(onSetSettingsDisable(false));
     clearInterval(tick.current);
