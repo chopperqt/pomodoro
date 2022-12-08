@@ -3,7 +3,7 @@
 .layout {
 	width: 100px;
 	height: 120px;
-	background: $primary-color;
+	background: var(--primary-color);
 	border-radius: 3px;
 	color: $text-color;
 	display: flex;
@@ -16,11 +16,11 @@
 
 	&:focus {
 		outline: none;
-		background: $accent-color;
+		background: var(--accent-color);
 	}
 
 	&:hover, &:active {
-		background: $dark-primary-color;
+		background: var(--dark-primary-color);
 	}
 
 	&:disabled {

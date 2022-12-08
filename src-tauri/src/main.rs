@@ -51,7 +51,7 @@ fn main() {
           size: _,
           ..
       } => {
-          println!("system tray received a double click");
+          
       }
       SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
           "quit" => {

@@ -38,7 +38,7 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
   };
 
   const handleHotKeyController = (e: KeyboardEvent) => {
-    if (e.key !== "Enter") {
+    if (e.code !== "Space") {
       return;
     }
 
@@ -160,5 +160,6 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     isStarted: start,
     handleToggleTimer,
     amountOfCompletedPoints,
+    isTimeout,
   };
 };
