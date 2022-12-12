@@ -1,4 +1,5 @@
 @import '@/assets/colors.module.scss';
+@import '@/assets/media.module.scss';
 
 .layout {
 	display: flex;
@@ -12,6 +13,10 @@
 	font-size: 10em;
 	color: $text-color;
 	font-family: 'RobotoMonoBold';
+
+	@media screen and (max-width: $break-point-table) {
+		font-size: 7em;
+	}
 }
 
 .wrap {

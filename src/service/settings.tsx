@@ -13,8 +13,8 @@ export interface SettingsStore {
 }
 
 const initialState: SettingsStore = {
-  time: 1,
-  timeout: 2,
+  time: 45,
+  timeout: 15,
   amountOfRepeats: 5,
   isSettingsDisabled: false,
   isAutoStart: false,

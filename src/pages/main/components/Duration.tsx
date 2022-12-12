@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 
 import styles from "../styles.module.scss";
+import { Times } from "../constants";
 
 const DURATION_TEXT = "Duration";
 const POMODORO_TEXT = "Pomodoro";
@@ -51,7 +52,7 @@ const Duration = ({ isMenuOpen = false }: DurationProps) => {
           value={time}
           text={POMODORO_TEXT}
           onSave={handleSetTime}
-          min={1}
+          min={25}
           max={60}
           step={1}
         />
