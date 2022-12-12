@@ -5,7 +5,7 @@
 	height: 120px;
 	background: var(--primary-color);
 	border-radius: 3px;
-	color: $text-color;
+	color: $white-color;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -47,7 +47,7 @@
 	font-size: 1em;
 	border-radius: 50%;
 	border: none;
-	background-color: $text-color;
+	background-color: $white-color;
 	color: $text-primary-color;
 	padding: 10px;
 	width: 30px;

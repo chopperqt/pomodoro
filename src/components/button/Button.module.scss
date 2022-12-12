@@ -1,23 +1,5 @@
 @import '@/assets/colors.module.scss';
 
-.counter {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-items: center;
-	align-items: center;
-	z-index: 10;
-	row-gap: 20px;
-	outline: none;
-}
-
-.wrap {
-	display: flex;
-	column-gap: 15px;
-	align-items: center;
-	outline: none;
-}
-
 .button {
 	display: flex;
 	justify-content: center;
@@ -33,15 +15,12 @@
 	outline: none;
 	cursor: pointer;
 
+	&:hover {
+		
+	}
+
 	&Disabled {
 		opacity: .7;
 		pointer-events: none;
 	}
-}
-
-.text {
-	text-align: center;
-	width: 80px;
-	font-size: 3em;
-	color: $white-color;
 }

@@ -11,7 +11,7 @@
 
 .timer {
 	font-size: 10em;
-	color: $text-color;
+	color: $white-color;
 	font-family: 'RobotoMonoBold';
 
 	@media screen and (max-width: $break-point-table) {
@@ -37,7 +37,7 @@
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
-	background-color: $text-color;
+	background-color: $white-color;
 	border-radius: 99999px;
 	cursor: pointer;
 }
@@ -46,7 +46,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	color: $text-color;
+	color: $white-color;
 
 	&Layout {
 		width: 400px;
@@ -74,8 +74,8 @@
 		min-width: 30px;
 		border-radius: 5px;
 		height: fit-content;
-		color: $text-color;
-		border: 2px solid $text-color;
+		color: $white-color;
+		border: 2px solid $white-color;
 		margin: 0 5px 0 5px;
 		height: 30px;
 

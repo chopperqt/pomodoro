@@ -1,7 +1,7 @@
 @import '@/assets/colors.module.scss';
 
 .overlay {
-	background: rgba($color-black, 0.2);
+	background: rgba($black-color, 0.2);
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -26,7 +26,7 @@
 	top: 0;
 	bottom: 0;
 	width: 330px;
-	background: $text-color;
+	background: $white-color;
 }
 
 .toggleButton {
@@ -42,7 +42,7 @@
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
-	background: $text-color;
+	background: $white-color;
 	z-index: 10;
 }
 

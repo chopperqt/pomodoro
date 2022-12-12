@@ -1,0 +1,35 @@
+@import '@/assets/colors.module.scss';
+
+.layout {
+	width: 100%;
+	height: 80px;
+	background: var(--primary-color);
+	justify-content: center;
+	border-radius: 3px;
+	color: $white-color;
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	border: none;
+	column-gap: 20px;
+	transition: .3s;
+
+	&:focus {
+		outline: none;
+		background: var(--accent-color);
+	}
+
+	&:disabled {
+		pointer-events: none;
+	}
+}
+
+.button {
+	font-size: 1.2em;
+	padding: 8px 13px;
+	border: none;
+	color: $white-color;
+	
+	border-radius: 3px;
+	background-color: var(--dark-primary-color);
+}
