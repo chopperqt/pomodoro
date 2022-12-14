@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 
 import styles from "../styles.module.scss";
-import { Times } from "../constants";
 
 const DURATION_TEXT = "Duration";
 const POMODORO_TEXT = "Pomodoro";
