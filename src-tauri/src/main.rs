@@ -3,7 +3,7 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::Manager;
+use tauri::{Manager, AppHandle};
 use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTray, SystemTrayEvent};
 
 #[tauri::command]
@@ -36,6 +36,15 @@ fn set_icon(app_handle: tauri::AppHandle, name: &str) {
     };
 }
 
+pub fn toggle_main_window(handle: &AppHandle) {
+  let window = handle.get_window("Pomodoro").expect("not today");
+  
+  if let Ok(v) = window.is_visible() {
+    let _ = window.show();
+    let _ = window.set_focus();
+  }
+}
+
 fn main() {
   let quit = CustomMenuItem::new("quit".to_string(), "Quit");
   let tray_menu = SystemTrayMenu::new()
@@ -46,6 +55,9 @@ fn main() {
   tauri::Builder::default()
     .system_tray(tray)
     .on_system_tray_event(move |app, event| match event {
+      SystemTrayEvent::LeftClick { .. } => {
+        toggle_main_window(app)  
+      }
       SystemTrayEvent::DoubleClick {
           position: _,
           size: _,

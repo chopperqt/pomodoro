@@ -8,9 +8,10 @@
   },
   "package": {
     "productName": "Pomodoro",
-    "version": "0.1.2"
+    "version": "1.0.0"
   },
   "tauri": {
+    "macOSPrivateApi": true,
     "allowlist": {
       "window": {
         "all": true,
