@@ -11,6 +11,10 @@ import {
 import { StatusList } from "@/helpers/statusList";
 
 import sound from "@/assets/sounds/sound.mp3";
+import { createNotification } from "@/helpers/createNotification";
+
+const END_POMODORO_TEXT = "30 seconds until the end of the pomodoro.";
+const END_TIMEOUT_TEXT = "30 seconds until the end of the timeout.";
 
 interface UseTimerProps {
   time: number;
@@ -41,6 +45,15 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
 
   const handleToggleTimer = () => {
     setStart(!start);
+  };
+
+  const handleReset = () => {
+    setStart(false);
+    setAmountOfCompletedPoints(0);
+    //firstStart.current = true;
+    isTimeout.current = false;
+
+    setTimer(time * 60);
   };
 
   const handleHotKeyController = (e: KeyboardEvent) => {
@@ -108,38 +121,48 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
   }, [time]);
 
   useEffect(() => {
-    if (timer === 0) {
-      handlePlaySound();
+    if (timer !== 0) {
+      if (timer === 30) {
+        const text = isTimeout.current ? END_TIMEOUT_TEXT : END_POMODORO_TEXT;
 
-      if (!isTimeout.current) {
-        isTimeout.current = true;
-
-        setTimer(timeout * 60);
-        setStart(false);
-
-        if (isAutoStart) {
-          handleStartTimer();
-        }
-
-        return;
+        createNotification({
+          text,
+        });
       }
 
-      if (amountOfCompletedPoints + 1 >= amountOfRepeats) {
-        setAmountOfCompletedPoints((amount) => amount + 1);
+      return;
+    }
 
-        return;
-      }
+    handlePlaySound();
 
-      setAmountOfCompletedPoints((amount) => amount + 1);
+    if (!isTimeout.current) {
+      isTimeout.current = true;
 
-      isTimeout.current = false;
-
-      setTimer(time * 60);
+      setTimer(timeout * 60);
       setStart(false);
 
       if (isAutoStart) {
         handleStartTimer();
       }
+
+      return;
+    }
+
+    if (amountOfCompletedPoints + 1 >= amountOfRepeats) {
+      setAmountOfCompletedPoints((amount) => amount + 1);
+
+      return;
+    }
+
+    setAmountOfCompletedPoints((amount) => amount + 1);
+
+    isTimeout.current = false;
+
+    setTimer(time * 60);
+    setStart(false);
+
+    if (isAutoStart) {
+      handleStartTimer();
     }
   }, [timer]);
 
@@ -176,5 +199,7 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     handleToggleTimer,
     amountOfCompletedPoints,
     isTimeout,
+    handleReset,
+    start,
   };
 };

@@ -40,6 +40,24 @@
 	background-color: $white-color;
 	border-radius: 99999px;
 	cursor: pointer;
+
+	&Restart {
+		display: flex;
+		justify-content: center;
+		height: 69px;
+		width: 69px;
+		padding: 0;
+		border-radius: 100%;
+	}
+
+	&Disabled {
+		opacity: 0.7;
+	}
+
+	&Wrap {
+		display: flex;
+		column-gap: 20px;
+	}
 }
 
 .text {
