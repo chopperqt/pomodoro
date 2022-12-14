@@ -1,7 +1,5 @@
 import { appWindow } from '@tauri-apps/api/window'
-
-appWindow.setDecorations(false)
-
+import { hide } from '@tauri-apps/api/app';
 
 document
   .getElementById('titlebar-minimize')

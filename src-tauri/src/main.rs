@@ -3,15 +3,16 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTray};
+use tauri::{Manager, AppHandle};
+use tauri::{CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTray, SystemTrayEvent};
 
 #[tauri::command]
 fn set_icon(app_handle: tauri::AppHandle, name: &str) {
     match name {
-        "notification" => app_handle
+        "pause" => app_handle
             .tray_handle()
             .set_icon(tauri::Icon::Raw(
-              include_bytes!("../icons/StoreLogo.png").to_vec(),
+              include_bytes!("../icons/tray/pomodoro-pause.png").to_vec(),
             ))
             .unwrap(),
         "start" => app_handle
@@ -29,23 +30,61 @@ fn set_icon(app_handle: tauri::AppHandle, name: &str) {
         _ => app_handle
             .tray_handle()
             .set_icon(tauri::Icon::Raw(
-                include_bytes!("../icons/32x32.png").to_vec(),
+                include_bytes!("../icons/tray/pomodoro-pause.png").to_vec(),
             ))
             .unwrap(),
     };
 }
 
+pub fn toggle_main_window(handle: &AppHandle) {
+  let window = handle.get_window("Pomodoro").expect("not today");
+  
+  if let Ok(v) = window.is_visible() {
+    let _ = window.show();
+    let _ = window.set_focus();
+  }
+}
+
 fn main() {
   let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-  let hide = CustomMenuItem::new("hide".to_string(), "Hide");
   let tray_menu = SystemTrayMenu::new()
-    .add_item(quit)
     .add_native_item(SystemTrayMenuItem::Separator)
-    .add_item(hide);
+    .add_item(quit);
   let tray = SystemTray::new().with_menu(tray_menu);
 
   tauri::Builder::default()
     .system_tray(tray)
+    .on_system_tray_event(move |app, event| match event {
+      SystemTrayEvent::LeftClick { .. } => {
+        toggle_main_window(app)  
+      }
+      SystemTrayEvent::DoubleClick {
+          position: _,
+          size: _,
+          ..
+      } => {
+          
+      }
+      SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+          "quit" => {
+              std::process::exit(0);
+          }
+          "show" => {
+              let w = app.get_window("main").unwrap();
+              w.show().unwrap();
+
+              // because the window shows in a specific workspace and the user
+              // can hide it and move to another, it will next show in the original
+              // workspace it was opened in.
+              // this is important for the window to always show in whatever workspace
+              // the user moved to and is active in.
+              w.set_focus().unwrap();
+          }
+
+          _ => {}
+      },
+      _ => {}
+  })
     .invoke_handler(tauri::generate_handler![
       set_icon,
     ])

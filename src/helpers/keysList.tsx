@@ -1,5 +1,5 @@
-export enum KeysList {
-  ArrowLeft,
-  ArrowRight,
-  Enter,
-}
+export const KeysList = {
+  ArrowLeft: "ArrowLeft",
+  ArrowRight: "ArrowRight",
+  Enter: "Enter",
+};

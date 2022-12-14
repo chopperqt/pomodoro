@@ -29,7 +29,7 @@
 	background: none;
 	font-size: 2em;
 	border: none;
-	color: $text-color;
+	color: $white-color;
 	cursor: pointer;
 
 	&Layout {
@@ -41,4 +41,11 @@
 	&:disabled {
 		color: $text-secondary-color;
 	}
+}
+
+.autoStart {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 5px;
 }

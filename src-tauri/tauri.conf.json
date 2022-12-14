@@ -8,9 +8,10 @@
   },
   "package": {
     "productName": "Pomodoro",
-    "version": "0.1.1"
+    "version": "1.0.0"
   },
   "tauri": {
+    "macOSPrivateApi": true,
     "allowlist": {
       "window": {
         "all": true,
@@ -44,7 +45,9 @@
         "startDragging": true,
         "print": false
       },
-      "all": false
+      "notification": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
@@ -55,11 +58,10 @@
       },
       "externalBin": [],
       "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
+        "icons/favicon-32x32.png",
+        "icons/favicon-96x96.png",
+        "icons/favicon.ico",
+        "icons/pomodoro.icns"
       ],
       "identifier": ".app",
       "longDescription": "",
@@ -71,7 +73,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "Pomodoro",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -95,12 +97,15 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 800,
         "resizable": true,
         "title": "Pomodoro",
-        "width": 800,
-        "minHeight": 600,
-        "minWidth": 800
+        "width": 1000,
+        "minHeight": 800,
+        "minWidth": 1000,
+        "label": "Pomodoro",
+        "transparent": true,
+        "decorations": false
       }
     ],
     "systemTray": {

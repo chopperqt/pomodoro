@@ -3,9 +3,9 @@
 .layout {
 	width: 100px;
 	height: 120px;
-	background: $primary-color;
+	background: var(--primary-color);
 	border-radius: 3px;
-	color: $text-color;
+	color: $white-color;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -16,11 +16,11 @@
 
 	&:focus {
 		outline: none;
-		background: $accent-color;
+		background: var(--accent-color);
 	}
 
 	&:hover, &:active {
-		background: $dark-primary-color;
+		background: var(--dark-primary-color);
 	}
 
 	&:disabled {
@@ -47,7 +47,7 @@
 	font-size: 1em;
 	border-radius: 50%;
 	border: none;
-	background-color: $text-color;
+	background-color: $white-color;
 	color: $text-primary-color;
 	padding: 10px;
 	width: 30px;

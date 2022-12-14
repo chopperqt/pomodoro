@@ -2,24 +2,28 @@ import cx from "classnames";
 
 import styles from "../Timer.module.scss";
 
-const OPEN_MENU_TEXT = " - Open the setting menu";
-const START_TEXT = " - Start/Pause the Pomodoro";
+const OPEN_MENU_TEXT = "Open the setting menu";
+const START_TEXT = "Start/Pause the Pomodoro";
 
 export const Hotkeys = () => {
   return (
     <div className={styles.textLayout}>
       <div className={cx(styles.text, "test-secondary")}>
+        {START_TEXT}
         <span className={cx(styles.textKey, styles.textKeyEnter)}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"
-            />
+          <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 24 24"
+            enable-background="new 0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M21,9c-0.6,0-1,0.4-1,1v3H4v-3c0-0.6-0.4-1-1-1s-1,0.4-1,1v4c0,0.6,0.4,1,1,1h18c0.6,0,1-0.4,1-1v-4C22,9.4,21.6,9,21,9z" />
           </svg>
         </span>
-        {START_TEXT}
       </div>
       <div className={cx(styles.text, "text-secondary")}>
+        {OPEN_MENU_TEXT}
         <span className={cx(styles.textWrap, "text-bold text-white")}>
           <span className={cx(styles.textKey, styles.textKeyShift)}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -28,7 +32,6 @@ export const Hotkeys = () => {
           </span>
           +<span className={styles.textKey}>K</span>
         </span>
-        {OPEN_MENU_TEXT}
       </div>
     </div>
   );

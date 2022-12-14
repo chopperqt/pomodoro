@@ -4,6 +4,8 @@ import ModalContainer from "./modal-container/ModalContainer";
 import Counter from "./counter/Counter";
 import Timer from './timer/Timer'
 import Pointer from "./pointer/Pointer";
+import Button from './button/Button'
+import Switcher from './switcher/Switcher'
 
 export {
 	TimeModal,
@@ -12,4 +14,6 @@ export {
 	Counter,
 	Timer,
 	Pointer,
+	Button,
+	Switcher,
 }

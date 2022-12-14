@@ -2,8 +2,19 @@ import { invoke } from "@tauri-apps/api";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
-import { getMenuOpen, onSetSettingsDisable } from "@/service/settings";
+import {
+  getAutoStart,
+  getMenuOpen,
+  onSetMenuOpen,
+  onSetSettingsDisable,
+} from "@/service/settings";
+import { StatusList } from "@/helpers/statusList";
+
 import sound from "@/assets/sounds/sound.mp3";
+import { createNotification } from "@/helpers/createNotification";
+
+const END_POMODORO_TEXT = "30 seconds until the end of the pomodoro.";
+const END_TIMEOUT_TEXT = "30 seconds until the end of the timeout.";
 
 interface UseTimerProps {
   time: number;
@@ -18,6 +29,7 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
   const [amountOfCompletedPoints, setAmountOfCompletedPoints] =
     useState<number>(0);
   const isMenuOpen = useSelector(getMenuOpen);
+  const isAutoStart = useSelector(getAutoStart);
 
   const firstStart = useRef(true);
   const tick = useRef();
@@ -35,8 +47,17 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     setStart(!start);
   };
 
+  const handleReset = () => {
+    setStart(false);
+    setAmountOfCompletedPoints(0);
+    //firstStart.current = true;
+    isTimeout.current = false;
+
+    setTimer(time * 60);
+  };
+
   const handleHotKeyController = (e: KeyboardEvent) => {
-    if (e.key !== "Enter") {
+    if (e.code !== "Space") {
       return;
     }
 
@@ -72,9 +93,12 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     }
 
     if (start) {
+      dispatch(onSetMenuOpen(false));
       dispatch(onSetSettingsDisable(true));
 
-      invoke("set_icon", { name: "start" });
+      const name = isTimeout.current ? StatusList.timeout : StatusList.start;
+
+      invoke("set_icon", { name });
 
       //@ts-ignore
       tick.current = setInterval(() => {
@@ -83,6 +107,8 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
 
       return;
     }
+
+    invoke("set_icon", { name: StatusList.pause });
 
     dispatch(onSetSettingsDisable(false));
     clearInterval(tick.current);
@@ -95,30 +121,48 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
   }, [time]);
 
   useEffect(() => {
-    if (timer === 0) {
-      handlePlaySound();
+    if (timer !== 0) {
+      if (timer === 30) {
+        const text = isTimeout.current ? END_TIMEOUT_TEXT : END_POMODORO_TEXT;
 
-      if (!isTimeout.current) {
-        isTimeout.current = true;
-
-        setTimer(timeout * 60);
-        setStart(false);
-
-        return;
+        createNotification({
+          text,
+        });
       }
 
-      if (amountOfCompletedPoints + 1 >= amountOfRepeats) {
-        setAmountOfCompletedPoints((amount) => amount + 1);
+      return;
+    }
 
-        return;
+    handlePlaySound();
+
+    if (!isTimeout.current) {
+      isTimeout.current = true;
+
+      setTimer(timeout * 60);
+      setStart(false);
+
+      if (isAutoStart) {
+        handleStartTimer();
       }
 
+      return;
+    }
+
+    if (amountOfCompletedPoints + 1 >= amountOfRepeats) {
       setAmountOfCompletedPoints((amount) => amount + 1);
 
-      isTimeout.current = false;
+      return;
+    }
 
-      setTimer(time * 60);
-      setStart(false);
+    setAmountOfCompletedPoints((amount) => amount + 1);
+
+    isTimeout.current = false;
+
+    setTimer(time * 60);
+    setStart(false);
+
+    if (isAutoStart) {
+      handleStartTimer();
     }
   }, [timer]);
 
@@ -154,5 +198,8 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     isStarted: start,
     handleToggleTimer,
     amountOfCompletedPoints,
+    isTimeout,
+    handleReset,
+    start,
   };
 };

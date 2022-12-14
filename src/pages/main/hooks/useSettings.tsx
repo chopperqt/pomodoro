@@ -1,10 +1,51 @@
-import { useCycle } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  getMenuOpen,
+  onSetMenuOpen,
+  getSettingsDisabled,
+} from "@/service/settings";
 
 export const useSettings = () => {
-  const [isOpened, toggleOpen] = useCycle(false, true);
+  const dispatch = useDispatch();
+  const isOpened = useSelector(getMenuOpen);
+  const isSettingsDisabled = useSelector(getSettingsDisabled);
+
+  const hotKeyRef = useRef<boolean>(false);
+
+  const toggleOpen = () => {
+    dispatch(onSetMenuOpen(!isOpened));
+  };
+
+  const handleHotKeyEvent = (e: KeyboardEvent) => {
+    e.stopPropagation();
+
+    if (e.key === "Shift") hotKeyRef.current = true;
+
+    if (e.key === "K" && hotKeyRef) {
+      toggleOpen();
+
+      return;
+    }
+
+    hotKeyRef.current = false;
+  };
+
+  useEffect(() => {
+    if (isSettingsDisabled) {
+      return;
+    }
+
+    window.addEventListener("keydown", handleHotKeyEvent);
+
+    return () => {
+      window.removeEventListener("keydown", handleHotKeyEvent);
+    };
+  }, [isOpened, isSettingsDisabled]);
 
   return {
     isOpened,
     toggleOpen,
+    isSettingsDisabled,
   };
 };

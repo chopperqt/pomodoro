@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 
 import styles from "../styles.module.scss";
+import { Times } from "../constants";
 
 const DURATION_TEXT = "Duration";
 const POMODORO_TEXT = "Pomodoro";
@@ -20,7 +21,7 @@ const AMOUNT_OF_REPEATS_TEXT = "Amount of Repeats";
 interface DurationProps {
   isMenuOpen: boolean;
 }
-const Duration = ({ isMenuOpen = false }: DurationProps) => {
+export const Duration = ({ isMenuOpen = false }: DurationProps) => {
   const time = useSelector(getTime);
   const timeout = useSelector(getTimeout);
   const amountOfRepeats = useSelector(getAmountOfRepeats);
@@ -51,7 +52,7 @@ const Duration = ({ isMenuOpen = false }: DurationProps) => {
           value={time}
           text={POMODORO_TEXT}
           onSave={handleSetTime}
-          min={1}
+          min={25}
           max={60}
           step={1}
         />
@@ -75,5 +76,3 @@ const Duration = ({ isMenuOpen = false }: DurationProps) => {
     </div>
   );
 };
-
-export default Duration;
