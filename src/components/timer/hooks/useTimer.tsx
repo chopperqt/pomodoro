@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
 import {
+  getAutoStart,
   getMenuOpen,
   onSetMenuOpen,
   onSetSettingsDisable,
@@ -24,6 +25,7 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
   const [amountOfCompletedPoints, setAmountOfCompletedPoints] =
     useState<number>(0);
   const isMenuOpen = useSelector(getMenuOpen);
+  const isAutoStart = useSelector(getAutoStart);
 
   const firstStart = useRef(true);
   const tick = useRef();
@@ -115,6 +117,10 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
         setTimer(timeout * 60);
         setStart(false);
 
+        if (isAutoStart) {
+          handleStartTimer();
+        }
+
         return;
       }
 
@@ -130,6 +136,10 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
 
       setTimer(time * 60);
       setStart(false);
+
+      if (isAutoStart) {
+        handleStartTimer();
+      }
     }
   }, [timer]);
 

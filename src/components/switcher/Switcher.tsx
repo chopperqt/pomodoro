@@ -6,11 +6,21 @@ import styles from "./Switcher.module.scss";
 const ENABLE_TEXT = "ENABLE";
 const DISABLE_TEXT = "DISABLE";
 
-interface SwitcherProps {
-  isEnable?: boolean;
+export interface SwitcherProps {
+  isEnable: boolean;
+  onToggle: (value: boolean) => void;
 }
-const Switcher = ({ isEnable = false }: SwitcherProps) => {
-  const { enableRef, disableRef, isEnabled } = useSwitcher();
+const Switcher = ({ isEnable = false, onToggle }: SwitcherProps) => {
+  const {
+    enableRef,
+    disableRef,
+    isEnabled,
+    handleSetDisabled,
+    handleSetEnabled,
+  } = useSwitcher({
+    isEnable,
+    onToggle,
+  });
 
   return (
     <div className={styles.layout}>
@@ -19,6 +29,7 @@ const Switcher = ({ isEnable = false }: SwitcherProps) => {
         className={cx(styles.button, {
           [styles.buttonActive]: isEnabled,
         })}
+        onClick={handleSetEnabled}
       >
         {ENABLE_TEXT}
       </button>
@@ -27,6 +38,7 @@ const Switcher = ({ isEnable = false }: SwitcherProps) => {
         className={cx(styles.button, {
           [styles.buttonActive]: !isEnabled,
         })}
+        onClick={handleSetDisabled}
       >
         {DISABLE_TEXT}
       </button>

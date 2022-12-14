@@ -101,7 +101,7 @@
         "minWidth": 1000,
         "label": "Pomodoro",
         "transparent": true,
-        "titleBarStyle": "Transparent"
+        "decorations": false
       }
     ],
     "systemTray": {

@@ -1,14 +1,9 @@
 import { appWindow } from '@tauri-apps/api/window'
-
-appWindow.setDecorations(false)
-
+import { hide } from '@tauri-apps/api/app';
 
 document
   .getElementById('titlebar-minimize')
-  .addEventListener('click', async () => {
-    
-  appWindow.unminimize()
-  })
+  .addEventListener('click', () => appWindow.minimize())
 document
   .getElementById('titlebar-maximize')
   .addEventListener('click', () => appWindow.toggleMaximize())
