@@ -21,7 +21,7 @@ const AMOUNT_OF_REPEATS_TEXT = "Amount of Repeats";
 interface DurationProps {
   isMenuOpen: boolean;
 }
-const Duration = ({ isMenuOpen = false }: DurationProps) => {
+export const Duration = ({ isMenuOpen = false }: DurationProps) => {
   const time = useSelector(getTime);
   const timeout = useSelector(getTimeout);
   const amountOfRepeats = useSelector(getAmountOfRepeats);
@@ -76,5 +76,3 @@ const Duration = ({ isMenuOpen = false }: DurationProps) => {
     </div>
   );
 };
-
-export default Duration;

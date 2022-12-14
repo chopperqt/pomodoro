@@ -1,7 +1,7 @@
-import { Cycle, motion, useCycle } from "framer-motion";
-import { MenuToggle } from "./components/MenuToggle";
+import { Cycle, motion } from "framer-motion";
+import cx from "classnames";
 
-import { getDimensions } from "./hooks/useDimension";
+import { MenuToggle } from "./components/MenuToggle";
 
 import styles from "./styles.module.scss";
 
@@ -46,10 +46,24 @@ interface SideBarProps {
   isOpened: boolean;
   onToggle: Cycle;
   children: React.ReactElement | React.ReactElement[];
+  isDisabled?: boolean;
 }
-const SideBar = ({ children, isOpened, onToggle }: SideBarProps) => {
+const SideBar = ({
+  children,
+  isOpened,
+  onToggle,
+  isDisabled,
+}: SideBarProps) => {
   const containerRef = useRef<HTMLElement | null>(null);
   const [height, setHeight] = useState(0);
+
+  const handleToggle = () => {
+    if (isDisabled) {
+      return;
+    }
+
+    onToggle();
+  };
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -59,8 +73,6 @@ const SideBar = ({ children, isOpened, onToggle }: SideBarProps) => {
     setHeight(containerRef.current.clientHeight);
   }, [containerRef]);
 
-  console.log(height);
-
   return (
     <>
       <motion.nav
@@ -68,13 +80,15 @@ const SideBar = ({ children, isOpened, onToggle }: SideBarProps) => {
         initial={false}
         animate={isOpened ? "open" : "closed"}
         custom={height}
-        className={styles.content}
+        className={cx(styles.content, {
+          [styles.contentDisabled]: isDisabled,
+        })}
       >
         <motion.div className={styles.background} variants={sidebar} />
         <motion.div variants={variants} className={styles.wrap}>
           {children}
         </motion.div>
-        <MenuToggle toggle={() => onToggle()} />
+        <MenuToggle toggle={handleToggle} />
       </motion.nav>
     </>
   );

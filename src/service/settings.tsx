@@ -1,6 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
+
 import { RootState } from ".";
 
 export interface SettingsStore {
@@ -47,6 +48,7 @@ export const settingsStore = createSlice({
 });
 
 const state = (state: RootState) => state.settingsStore;
+
 export const getTime = createSelector(state, (state) => state.time);
 export const getTimeout = createSelector(state, (state) => state.timeout);
 export const getAmountOfRepeats = createSelector(

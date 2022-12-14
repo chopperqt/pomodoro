@@ -13,13 +13,15 @@ const Path = (props: any) => (
   />
 );
 
-export const MenuToggle = ({ toggle }: any) => (
-  <button onClick={toggle} className={styles.toggleButton}>
+export const MenuToggle = ({ toggle, isDisabled }: any) => (
+  <button
+    onClick={toggle}
+    className={styles.toggleButton}
+    disabled={isDisabled}
+  >
     <ThemeContext.Consumer>
       {({ theme }) => {
         const stroke = theme === "green" ? "#4CAF50" : "#F44336";
-
-        console.log("theme: ", theme);
 
         return (
           <svg width="23" color="transparent" height="23" viewBox="0 0 23 23">

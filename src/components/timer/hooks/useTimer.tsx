@@ -2,7 +2,11 @@ import { invoke } from "@tauri-apps/api";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 
-import { getMenuOpen, onSetSettingsDisable } from "@/service/settings";
+import {
+  getMenuOpen,
+  onSetMenuOpen,
+  onSetSettingsDisable,
+} from "@/service/settings";
 import { StatusList } from "@/helpers/statusList";
 
 import sound from "@/assets/sounds/sound.mp3";
@@ -74,6 +78,7 @@ export const useTimer = ({ time, timeout, amountOfRepeats }: UseTimerProps) => {
     }
 
     if (start) {
+      dispatch(onSetMenuOpen(false));
       dispatch(onSetSettingsDisable(true));
 
       const name = isTimeout.current ? StatusList.timeout : StatusList.start;
