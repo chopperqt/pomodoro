@@ -46,8 +46,8 @@ const Timer = () => {
 
   return (
     <ThemeContext.Consumer>
-      {({ setTheme }) => {
-        setTheme(isTimeout.current ? "green" : "red");
+      {(context: any) => {
+        context.setTheme(isTimeout.current ? "green" : "red");
 
         return (
           <div className={styles.layout}>
