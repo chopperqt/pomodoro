@@ -39,7 +39,7 @@ fn set_icon(app_handle: tauri::AppHandle, name: &str) {
 pub fn toggle_main_window(handle: &AppHandle) {
   let window = handle.get_window("Pomodoro").expect("not today");
   
-  if let Ok(v) = window.is_visible() {
+  if let Ok(_v) = window.is_visible() {
     let _ = window.show();
     let _ = window.set_focus();
   }
