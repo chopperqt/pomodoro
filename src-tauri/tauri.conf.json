@@ -60,7 +60,7 @@
       "icon": [
         "icons/favicon-32x32.png",
         "icons/favicon-96x96.png",
-        "icons/favicon.ico",
+        "icons/pomodoro.ico",
         "icons/pomodoro.icns"
       ],
       "identifier": ".app",
