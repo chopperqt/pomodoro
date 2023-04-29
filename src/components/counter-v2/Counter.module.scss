@@ -1,0 +1,44 @@
+@import '@/assets/colors.module.scss';
+ 
+.layout {
+  background-color: var(--primary-color);
+  display: flex;
+  padding: 10px 10px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px; 
+  border-radius: 3px;
+}
+
+.text {
+	text-align: center;
+	font-size: 24px;
+	width: 25px;
+}
+
+.button {
+	font-size: 1.2em;
+	padding: 8px 13px;
+	border: none;
+	color: $white-color;
+	cursor: pointer;
+	border-radius: 3px;
+	background-color: var(--dark-primary-color);
+	opacity: 0.8;
+	transition: .2s;
+
+	&:hover {
+		opacity: 1;
+	}
+
+	&Active {
+		background-color: var(--dark-primary-color);
+		opacity: 1;
+		cursor: pointer;
+
+		&:hover
+		 {
+			opacity: 1;
+		}
+	}
+}
