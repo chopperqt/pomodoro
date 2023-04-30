@@ -1,11 +1,6 @@
-import { TimeModal } from "@/components";
 import {
-  getAmountOfRepeats,
-  getTime,
-  getTimeout,
   onSetTime,
   onSetTimeout,
-  onSetAmountOfRepeats,
 } from "@/service/settings";
 import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
@@ -21,19 +16,8 @@ interface DurationProps {
   isMenuOpen: boolean;
 }
 export const Duration = ({ isMenuOpen = false }: DurationProps) => {
-  const time = useSelector(getTime);
-  const timeout = useSelector(getTimeout);
-  const amountOfRepeats = useSelector(getAmountOfRepeats);
 
   const dispatch = useDispatch();
-
-  const handleSetTimeout = (timeout: number) => {
-    dispatch(onSetTimeout(timeout));
-  };
-
-  const handleSetAmountOfRepeats = (amountOfRepeats: number) => {
-    dispatch(onSetAmountOfRepeats(amountOfRepeats));
-  };
 
   return (
     <div className={styles.durationLayout}>
