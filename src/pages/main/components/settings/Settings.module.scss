@@ -1,9 +1,14 @@
-.counter {
+.layout {
+  display: grid;
+  grid-row-gap: 15px;
+}
+
+.wrapper {
   display: grid;
   row-gap: 5px;
   text-align: center;
 } 
 
-.counterText {
+.wrapperText {
   font-size: 18px;
 }

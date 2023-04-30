@@ -17,8 +17,8 @@ export const CounterPreview = ({
   value,
   onChange,
 }: CounterPreviewProps) => (
-  <div className={styles.counter}>
-    <div className={cx(styles.counterText, "text-bold")}>{label}</div>
+  <div className={styles.wrapper}>
+    <div className={cx(styles.wrapperText, "text-bold")}>{label}</div>
     <CounterV2
       min={min}
       max={max}

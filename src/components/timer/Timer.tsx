@@ -11,6 +11,7 @@ import { ThemeContext } from "@/context/ThemeContext";
 import { TimerPreviev } from "./partials/TimerPreview";
 
 import styles from "./Timer.module.scss";
+import { getFormateTime } from "./helpers/getFormateTime";
 
 const defaultAnimate = {
   whileTap: { scale: 0.95 },
@@ -56,6 +57,7 @@ const Timer = () => {
               amountOfPoints={amountOfRepeats}
             />
             <TimerPreviev time={timer} />
+            <div>{getFormateTime(timeout * 60)}</div>
             <div className={styles.buttonWrap}>
               <motion.button
                 onClick={handleToggleTimer}
