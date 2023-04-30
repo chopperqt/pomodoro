@@ -8,7 +8,6 @@ import { getAmountOfRepeats, getTime, getTimeout } from "@/service/settings";
 import { useTimer } from "./hooks/useTimer";
 import { Hotkeys } from "./partials/Hotkeys";
 import { ThemeContext } from "@/context/ThemeContext";
-import { TimerPreviev } from "./partials/TimerPreview";
 
 import styles from "./Timer.module.scss";
 import { getFormateTime } from "./helpers/getFormateTime";
@@ -23,19 +22,27 @@ const Timer = () => {
   const timeout = useSelector(getTimeout);
   const amountOfRepeats = useSelector(getAmountOfRepeats);
 
+  // const {
+  //   timer,
+  //   isStarted,
+  //   handleToggleTimer,
+  //   amountOfCompletedPoints,
+  //   isTimeout,
+  //   start,
+  //   handleReset,
+  // } = useTimer({
+  //   time,
+  //   timeout,
+  //   amountOfRepeats,
+  // });
+
   const {
-    timer,
+    handleToggle: handleTogglePomodoro,
+    timer: timerPomodoro,
     isStarted,
-    handleToggleTimer,
-    amountOfCompletedPoints,
-    isTimeout,
-    start,
-    handleReset,
   } = useTimer({
     time,
-    timeout,
-    amountOfRepeats,
-  });
+  })
 
   let icon = faPlay;
   let text = "Start";
@@ -45,22 +52,36 @@ const Timer = () => {
     text = "Pause";
   }
 
+  const formattedTimeout = getFormateTime(timeout * 60)
+  const formattedPomodoro = getFormateTime(timerPomodoro)
+
   return (
     <ThemeContext.Consumer>
       {(context: any) => {
-        context?.setTheme(isTimeout.current ? "green" : "red");
+        //context?.setTheme(isTimeout.current ? "green" : "red");
 
         return (
           <div className={styles.layout}>
             <Pointer
-              amountOfCompletePoints={amountOfCompletedPoints}
+              amountOfCompletePoints={0}
               amountOfPoints={amountOfRepeats}
             />
-            <TimerPreviev time={timer} />
-            <div>{getFormateTime(timeout * 60)}</div>
+            <div className={cx(styles.timer, {
+              "text-white": !isStarted,
+              "text-secondary-color": isStarted,
+            })}>
+              {formattedPomodoro}
+            </div >
+            <div className={cx(styles.timerTimeout, {
+              "text-white": isStarted,
+              "text-secondary-color": isStarted,
+            })}
+            >
+              {formattedTimeout}
+            </div>
             <div className={styles.buttonWrap}>
               <motion.button
-                onClick={handleToggleTimer}
+                onClick={handleTogglePomodoro}
                 className={styles.button}
                 {...defaultAnimate}
               >
@@ -69,10 +90,10 @@ const Timer = () => {
               </motion.button>
               <motion.button
                 className={cx(styles.button, styles.buttonRestart, {
-                  [styles.buttonDisabled]: start,
+                  [styles.buttonDisabled]: isStarted,
                 })}
-                onClick={handleReset}
-                disabled={start}
+                onClick={() => { }}
+                disabled={isStarted}
                 {...defaultAnimate}
               >
                 <FontAwesomeIcon icon={faRefresh} />
