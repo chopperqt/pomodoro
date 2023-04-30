@@ -47,30 +47,33 @@ export const Duration = ({ isMenuOpen = false }: DurationProps) => {
           "no-click": !isMenuOpen,
         })}
       >
-        <TimeModal
-          value={time}
-          text={POMODORO_TEXT}
-          onSave={handleSetTime}
-          min={25}
-          max={60}
-          step={1}
-        />
-        <TimeModal
-          value={timeout}
-          text={TIMEOUT_TEXT}
-          onSave={handleSetTimeout}
-          min={5}
-          max={60}
-          step={1}
-        />
-        <TimeModal
-          value={amountOfRepeats}
-          text={AMOUNT_OF_REPEATS_TEXT}
-          onSave={handleSetAmountOfRepeats}
-          min={0}
-          max={60}
-          step={1}
-        />
+        <div>
+          <div>{POMODORO_TEXT}</div>
+          <CounterV2
+            min={25}
+            max={60}
+            value={30}
+            onChange={() => { }}
+          />
+        </div>
+        <div>
+          <div>{TIMEOUT_TEXT}</div>
+          <CounterV2
+            min={5}
+            max={60}
+            value={5}
+            onChange={() => { }}
+          />
+        </div>
+        <div>
+          <div>{AMOUNT_OF_REPEATS_TEXT}</div>
+          <CounterV2
+            min={3}
+            max={10}
+            value={3}
+            onChange={() => { }}
+          />
+        </div>
       </div>
     </div>
   );

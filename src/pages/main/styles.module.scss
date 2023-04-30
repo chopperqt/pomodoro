@@ -8,9 +8,10 @@
 }
 
 .duration {
+	display: grid;
 	margin-top: 10px;
-	display: flex;
-	column-gap: 5px;
+	flex-direction: column;
+	row-gap: 15px;
 	justify-content: center;
 
 	&Layout {

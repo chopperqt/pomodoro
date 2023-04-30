@@ -2,7 +2,9 @@
 export {}
 declare global {
   const Button: typeof import('./components/index')['Button']
+  const Checkbox: typeof import('./components/index')['Checkbox']
   const Counter: typeof import('./components/index')['Counter']
+  const CounterV2: typeof import('./components/index')['CounterV2']
   const ModalContainer: typeof import('./components/index')['ModalContainer']
   const Pointer: typeof import('./components/index')['Pointer']
   const SideBar: typeof import('./components/index')['SideBar']

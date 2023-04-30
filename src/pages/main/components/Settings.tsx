@@ -14,6 +14,7 @@ const Settings = () => {
       onToggle={toggleOpen}
       isDisabled={isSettingsDisabled}
     >
+      <Checkbox />
       <div className={styles.settingsLayout}>
         <Duration isMenuOpen={isOpened} />
         <AutoStart />

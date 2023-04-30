@@ -20,8 +20,8 @@ export const MenuToggle = ({ toggle, isDisabled }: any) => (
     disabled={isDisabled}
   >
     <ThemeContext.Consumer>
-      {({ theme }) => {
-        const stroke = theme === "green" ? "#4CAF50" : "#F44336";
+      {(context: any) => {
+        const stroke = context.theme === "green" ? "#4CAF50" : "#F44336";
 
         return (
           <svg width="23" color="transparent" height="23" viewBox="0 0 23 23">
