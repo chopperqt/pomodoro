@@ -27,10 +27,6 @@ export const Duration = ({ isMenuOpen = false }: DurationProps) => {
 
   const dispatch = useDispatch();
 
-  const handleSetTime = (time: number) => {
-    dispatch(onSetTime(time));
-  };
-
   const handleSetTimeout = (timeout: number) => {
     dispatch(onSetTimeout(timeout));
   };
@@ -52,8 +48,8 @@ export const Duration = ({ isMenuOpen = false }: DurationProps) => {
           <CounterV2
             min={25}
             max={60}
-            value={30}
-            onChange={() => { }}
+            value={25}
+            onChange={(value: number) => dispatch(onSetTime(value))}
           />
         </div>
         <div>
@@ -62,7 +58,7 @@ export const Duration = ({ isMenuOpen = false }: DurationProps) => {
             min={5}
             max={60}
             value={5}
-            onChange={() => { }}
+            onChange={(value) => dispatch(onSetTimeout(value))}
           />
         </div>
         <div>

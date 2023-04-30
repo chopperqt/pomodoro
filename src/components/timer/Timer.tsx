@@ -8,6 +8,7 @@ import { getAmountOfRepeats, getTime, getTimeout } from "@/service/settings";
 import { useTimer } from "./hooks/useTimer";
 import { Hotkeys } from "./partials/Hotkeys";
 import { ThemeContext } from "@/context/ThemeContext";
+import { TimerPreviev } from "./partials/TimerPreview";
 
 import styles from "./Timer.module.scss";
 
@@ -23,7 +24,6 @@ const Timer = () => {
 
   const {
     timer,
-    dispSecondsAsMins,
     isStarted,
     handleToggleTimer,
     amountOfCompletedPoints,
@@ -55,7 +55,7 @@ const Timer = () => {
               amountOfCompletePoints={amountOfCompletedPoints}
               amountOfPoints={amountOfRepeats}
             />
-            <div className={styles.timer}>{dispSecondsAsMins(timer)}</div>
+            <TimerPreviev time={timer} />
             <div className={styles.buttonWrap}>
               <motion.button
                 onClick={handleToggleTimer}

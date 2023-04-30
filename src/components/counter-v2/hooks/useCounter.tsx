@@ -29,8 +29,12 @@ export const useCounter = ({
   }
 
   useEffect(() => {
-    onChange(value)
-  }, [value])
+    if (!currentValue === value) {
+      return
+    }
+
+    onChange(currentValue)
+  }, [currentValue])
 
   return {
     currentValue,
