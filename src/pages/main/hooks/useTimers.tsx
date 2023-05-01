@@ -1,17 +1,16 @@
-import { invoke } from "@tauri-apps/api";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  getAutoStart,
   getMenuOpen,
   onSetMenuOpen,
   onSetSettingsDisable,
 } from "@/service/settings";
-import { StatusList } from "@/helpers/statusList";
 import { createNotification } from "@/helpers/createNotification";
 
 const END_POMODORO_TEXT = "30 seconds until the end of the pomodoro.";
 const END_TIMEOUT_TEXT = "30 seconds until the end of the timeout.";
+
+const NOTIFICATION_TIME = 30
 
 interface UseTimerProps {
   timerPomodoro: number;
@@ -57,7 +56,6 @@ export const useTimers = ({
       return
     }
 
-    console.log('tut')
     handleToggleTimeout()
   }
 
@@ -103,29 +101,25 @@ export const useTimers = ({
     dispatch(onSetSettingsDisable(false));
   }, [isPomodoro, isTimeout]);
 
+  useEffect(() => {
+    if (timerPomodoro !== NOTIFICATION_TIME) {
+      return
+    }
 
-  // useEffect(() => {
-  //   if (timer === 30) {
-  //     const text = isTimeout.current ? END_TIMEOUT_TEXT : END_POMODORO_TEXT
-  //
-  //     createNotification({
-  //       text,
-  //     })
-  //   }
-  //
-  //   if (timer !== 0) {
-  //     return;
-  //   }
-  //
-  //
-  //   if (amountOfCompletedPoints + 1 >= amountOfRepeats) {
-  //     setAmountOfCompletedPoints((amount) => amount + 1);
-  //
-  //     return;
-  //   }
-  //
-  //   setAmountOfCompletedPoints((amount) => amount + 1);
-  // }, [timer]);
+    createNotification({
+      text: END_POMODORO_TEXT,
+    })
+  }, [timerPomodoro]);
+
+  useEffect(() => {
+    if (timerTimeout !== NOTIFICATION_TIME) {
+      return
+    }
+
+    createNotification({
+      text: END_TIMEOUT_TEXT,
+    })
+  }, [timerTimeout])
 
   useEffect(() => {
     if (isMenuOpen) {

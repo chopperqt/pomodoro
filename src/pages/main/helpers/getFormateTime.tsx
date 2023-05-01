@@ -1,3 +1,4 @@
+
 export const getFormateTime = (time: number) => {
 
   const mins = Math.floor(time / 60);

@@ -1,3 +1,4 @@
+
 export const getOpacity = (value?: boolean) => {
   let opacity = 1
 

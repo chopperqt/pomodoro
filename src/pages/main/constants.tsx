@@ -9,18 +9,18 @@ export const Timers = {
     label: 'Pomodoro',
     min: 25,
     max: 60,
-    value: 1,
+    value: 30,
   },
   [TimerKey.timeout]: {
     label: 'Timeout',
     min: 5,
     max: 60,
-    value: 1,
+    value: 10,
   },
   [TimerKey.repeats]: {
     label: 'Amout of repeats',
     min: 3,
     max: 10,
-    value: 2,
+    value: 5,
   }
 }
