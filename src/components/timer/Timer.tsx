@@ -12,11 +12,16 @@ import { ThemeContext } from "@/context/ThemeContext";
 import styles from "./Timer.module.scss";
 import { getFormateTime } from "./helpers/getFormateTime";
 import { useTimers } from "./hooks/useTimers";
+import { getOpacity } from "./helpers/getOpacity";
 
 const defaultAnimate = {
   whileTap: { scale: 0.95 },
   whileHover: { scale: 1.1 },
 };
+
+const defaultTextAnime = {
+  whileHover: { opacity: 0.1 }
+}
 
 const Timer = () => {
   const time = useSelector(getTime);
@@ -82,6 +87,9 @@ const Timer = () => {
   const formattedTimeout = getFormateTime(timerTimeout)
   const formattedPomodoro = getFormateTime(timerPomodoro)
 
+  const animatePomodoro = getOpacity(!isFinishedPomodoro)
+  const animateTimeout = getOpacity(isFinishedPomodoro)
+
   return (
     <ThemeContext.Consumer>
       {(context: any) => {
@@ -93,19 +101,18 @@ const Timer = () => {
               amountOfCompletePoints={amountOfCompletedPoints}
               amountOfPoints={amountOfRepeats}
             />
-            <div className={cx(styles.timer, {
-              "text-white": !isStartedPomodoro,
-              "text-secondary-color": isStartedPomodoro,
-            })}>
+            <motion.div
+              animate={animatePomodoro}
+              className={cx(styles.timer, "text-white")}
+            >
               {formattedPomodoro}
-            </div >
-            <div className={cx(styles.timerTimeout, {
-              "text-white": isStartedPomodoro,
-              "text-secondary-color": isStartedPomodoro,
-            })}
+            </motion.div >
+            <motion.div
+              animate={animateTimeout}
+              className={cx(styles.timerTimeout, "text-white")}
             >
               {formattedTimeout}
-            </div>
+            </motion.div>
             <div className={styles.buttonWrap}>
               <motion.button
                 onClick={handleToggle}

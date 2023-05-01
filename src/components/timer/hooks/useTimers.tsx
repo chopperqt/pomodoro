@@ -49,6 +49,8 @@ export const useTimers = ({
     return isFinishedTimeout && isFinishedPomodoro
   }, [isFinishedPomodoro, isFinishedTimeout])
 
+  const isActiveTimeout = isFinishedPomodoro
+
   const handleToggle = () => {
     if (!isFinishedPomodoro) {
       handleTogglePomodoro()
