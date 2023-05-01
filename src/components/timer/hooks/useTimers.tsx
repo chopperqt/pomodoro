@@ -41,15 +41,14 @@ export const useTimers = ({
   handleResetTimeout,
 }: UseTimerProps) => {
   const dispatch = useDispatch();
-  const [amountOfCompletedPoints, setAmountOfCompletedPoints] =
-    useState<number>(0);
+
+  const [amountOfCompletedPoints, setAmountOfCompletedPoints] = useState(0);
+
   const isMenuOpen = useSelector(getMenuOpen);
 
   const isFinishedSessia = useMemo(() => {
     return isFinishedTimeout && isFinishedPomodoro
   }, [isFinishedPomodoro, isFinishedTimeout])
-
-  const isActiveTimeout = isFinishedPomodoro
 
   const handleToggle = () => {
     if (!isFinishedPomodoro) {
@@ -62,10 +61,6 @@ export const useTimers = ({
     handleToggleTimeout()
   }
 
-  const handleReset = () => {
-    setAmountOfCompletedPoints(0);
-  };
-
   const handleHotKeyController = (e: KeyboardEvent) => {
     if (e.code !== "Space") {
       return;
@@ -73,8 +68,13 @@ export const useTimers = ({
   };
 
   const handleResetTimers = () => {
-    handleResetTimeout()
     handleResetPomodoro()
+    handleResetTimeout()
+  }
+
+  const handleReset = () => {
+    setAmountOfCompletedPoints(0)
+    handleResetTimers()
   }
 
   useEffect(() => {

@@ -21,6 +21,6 @@ export const Timers = {
     label: 'Amout of repeats',
     min: 3,
     max: 10,
-    value: 5,
+    value: 2,
   }
 }

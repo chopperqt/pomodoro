@@ -7,7 +7,7 @@ import cx from "classnames";
 import { getAmountOfRepeats, getTime, getTimeout } from "@/service/settings";
 import { useTimer } from "./hooks/useTimer";
 import { Hotkeys } from "./partials/Hotkeys";
-import { ThemeContext } from "@/context/ThemeContext";
+import { ThemeContext, Themes } from "@/context/ThemeContext";
 
 import styles from "./Timer.module.scss";
 import { getFormateTime } from "./helpers/getFormateTime";
@@ -19,28 +19,10 @@ const defaultAnimate = {
   whileHover: { scale: 1.1 },
 };
 
-const defaultTextAnime = {
-  whileHover: { opacity: 0.1 }
-}
-
 const Timer = () => {
   const time = useSelector(getTime);
   const timeout = useSelector(getTimeout);
   const amountOfRepeats = useSelector(getAmountOfRepeats);
-
-  // const {
-  //   timer,
-  //   isStarted,
-  //   handleToggleTimer,
-  //   amountOfCompletedPoints,
-  //   isTimeout,
-  //   start,
-  //   handleReset,
-  // } = useTimer({
-  //   time,
-  //   timeout,
-  //   amountOfRepeats,
-  // });
 
   const {
     handleToggle: handleTogglePomodoro,
@@ -62,7 +44,8 @@ const Timer = () => {
 
   const {
     handleToggle,
-    amountOfCompletedPoints
+    amountOfCompletedPoints,
+    handleReset
   } = useTimers({
     amountOfRepeats,
     isPomodoro: isStartedPomodoro,
@@ -79,7 +62,9 @@ const Timer = () => {
   let icon = faPlay;
   let text = "Start";
 
-  if (isStartedPomodoro || isStartedTimeout) {
+  const isStart = isStartedPomodoro || isStartedTimeout
+
+  if (isStart) {
     icon = faPause;
     text = "Pause";
   }
@@ -93,7 +78,7 @@ const Timer = () => {
   return (
     <ThemeContext.Consumer>
       {(context: any) => {
-        //context?.setTheme(isTimeout.current ? "green" : "red");
+        context?.setTheme(isFinishedPomodoro ? Themes.green : Themes.red);
 
         return (
           <div className={styles.layout}>
@@ -126,8 +111,8 @@ const Timer = () => {
                 className={cx(styles.button, styles.buttonRestart, {
                   [styles.buttonDisabled]: isStartedPomodoro,
                 })}
-                onClick={() => { }}
-                disabled={isStartedPomodoro}
+                onClick={handleReset}
+                disabled={isStart}
                 {...defaultAnimate}
               >
                 <FontAwesomeIcon icon={faRefresh} />
