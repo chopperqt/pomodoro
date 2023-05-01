@@ -9,10 +9,17 @@ interface UseTimerProps {
 export const useTimer = ({ time }: UseTimerProps) => {
   const [handlePlaySound] = useSound(sound);
 
-  const [timer, setTimer] = useState<number>(time * 60);
+  const formattedTime = time * 60
+
+  const [timer, setTimer] = useState<number>(formattedTime);
   const [start, setStart] = useState<boolean>(false);
+  const [isFinished, setFinished] = useState(false);
 
   const tick = useRef();
+
+  useEffect(() => {
+    setTimer(formattedTime)
+  }, [time])
 
   const handleStart = () => {
     setStart(true);
@@ -25,6 +32,11 @@ export const useTimer = ({ time }: UseTimerProps) => {
   const handleToggle = () => {
     setStart(!start);
   };
+
+  const handleReset = () => {
+    setTimer(formattedTime)
+    setFinished(false)
+  }
 
   /**
    * Отсчитываем 1, кажду секунде, от таймера
@@ -55,6 +67,7 @@ export const useTimer = ({ time }: UseTimerProps) => {
       return;
     }
 
+    setFinished(true);
     handlePlaySound();
 
     setStart(false);
@@ -65,6 +78,8 @@ export const useTimer = ({ time }: UseTimerProps) => {
     handleStart,
     handleStop,
     handleToggle,
+    handleReset,
+    isFinished,
     timer,
     isStarted: start,
     start,

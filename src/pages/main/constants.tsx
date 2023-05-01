@@ -15,7 +15,7 @@ export const Timers = {
     label: 'Timeout',
     min: 5,
     max: 60,
-    value: 5,
+    value: 1,
   },
   [TimerKey.repeats]: {
     label: 'Amout of repeats',
