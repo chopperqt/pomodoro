@@ -57,7 +57,7 @@ const Timer = () => {
 
   const {
     handleToggle,
-
+    amountOfCompletedPoints
   } = useTimers({
     amountOfRepeats,
     isPomodoro: isStartedPomodoro,
@@ -74,7 +74,7 @@ const Timer = () => {
   let icon = faPlay;
   let text = "Start";
 
-  if (isStartedPomodoro) {
+  if (isStartedPomodoro || isStartedTimeout) {
     icon = faPause;
     text = "Pause";
   }
@@ -90,7 +90,7 @@ const Timer = () => {
         return (
           <div className={styles.layout}>
             <Pointer
-              amountOfCompletePoints={0}
+              amountOfCompletePoints={amountOfCompletedPoints}
               amountOfPoints={amountOfRepeats}
             />
             <div className={cx(styles.timer, {

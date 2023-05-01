@@ -45,6 +45,10 @@ export const useTimers = ({
     useState<number>(0);
   const isMenuOpen = useSelector(getMenuOpen);
 
+  const isFinishedSessia = useMemo(() => {
+    return isFinishedTimeout && isFinishedPomodoro
+  }, [isFinishedPomodoro, isFinishedTimeout])
+
   const handleToggle = () => {
     if (!isFinishedPomodoro) {
       handleTogglePomodoro()
@@ -72,12 +76,16 @@ export const useTimers = ({
   }
 
   useEffect(() => {
-    if (!isFinishedTimeout || !isFinishedPomodoro) {
+    if (!isFinishedSessia) {
       return
     }
 
+    if (amountOfCompletedPoints < amountOfRepeats) {
+      setAmountOfCompletedPoints((prev) => prev + 1)
+    }
+
     handleResetTimers()
-  }, [isFinishedPomodoro, isFinishedTimeout])
+  }, [isFinishedSessia])
 
   useEffect(() => {
     if (isPomodoro || isTimeout) {
@@ -130,6 +138,7 @@ export const useTimers = ({
   }, [isTimeout, isPomodoro, isMenuOpen]);
 
   return {
+    amountOfCompletedPoints,
     handleToggle,
     handleReset,
   };
