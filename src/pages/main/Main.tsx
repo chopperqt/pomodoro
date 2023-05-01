@@ -1,10 +1,11 @@
-import Settings from "./components/Settings";
+import { Settings } from "./components/settings";
+import { Timers } from "./components/timers"
 
 const Main = () => {
   return (
     <div>
       <Settings />
-      <Timer />
+      <Timers />
     </div>
   );
 };

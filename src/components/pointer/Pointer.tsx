@@ -8,16 +8,16 @@ interface PointerProps {
   amountOfCompletePoints: number;
 }
 
-const Pointer = ({ amountOfCompletePoints, amountOfPoints }: PointerProps) => {
+const Pointer = memo(({ amountOfCompletePoints, amountOfPoints }: PointerProps) => {
   const arrayOfPoint = getRandomArray(amountOfPoints);
 
   return (
     <div className={styles.layout}>
-      {arrayOfPoint.map(({}, index) => (
+      {arrayOfPoint.map(({ }, index) => (
         <Point key={index} isActive={index + 1 <= amountOfCompletePoints} />
       ))}
     </div>
   );
-};
+});
 
 export default Pointer;

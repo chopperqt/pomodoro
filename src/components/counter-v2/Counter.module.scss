@@ -1,26 +1,19 @@
 @import '@/assets/colors.module.scss';
-
+ 
 .layout {
-	background: var(--primary-color);
-	padding: 10px; 
-	justify-content: center;
-	border-radius: 3px;
-	color: $white-color;
-	display: flex;
-	align-items: center;
-	text-transform: uppercase;
-	border: none;
-	column-gap: 20px;
-	transition: .3s;
+  background-color: var(--primary-color);
+  display: flex;
+  padding: 10px 10px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px; 
+  border-radius: 3px;
+}
 
-	&:focus {
-		outline: none;
-		background: var(--accent-color);
-	}
-
-	&:disabled {
-		pointer-events: none;
-	}
+.text {
+	text-align: center;
+	font-size: 24px;
+	width: 25px;
 }
 
 .button {
@@ -31,11 +24,11 @@
 	cursor: pointer;
 	border-radius: 3px;
 	background-color: var(--dark-primary-color);
-	opacity: 0.5;
+	opacity: 0.8;
 	transition: .2s;
 
 	&:hover {
-		opacity: 0.8;
+		opacity: 1;
 	}
 
 	&Active {

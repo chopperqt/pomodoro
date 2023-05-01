@@ -3,8 +3,6 @@ export const getDimensions = (
 ) => {
   const dimensions = useRef({ width: 0, height: 0 });
 
-  console.log("dimenstion: ", container);
-
   useEffect(() => {
     dimensions.current.width = container?.current.offsetWidth;
     dimensions.current.height = container?.current.offsetHeight;

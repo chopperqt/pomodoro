@@ -11,12 +11,16 @@
 
 .timer {
 	font-size: 10em;
-	color: $white-color;
 	font-family: 'RobotoMonoBold';
 
 	@media screen and (max-width: $break-point-table) {
 		font-size: 7em;
 	}
+}
+
+.timerTimeout {
+	font-size: 3em;
+	font-family: 'RobotoMonoBold';
 }
 
 .wrap {

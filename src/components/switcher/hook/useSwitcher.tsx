@@ -31,8 +31,6 @@ export const useSwitcher = ({ isEnable, onToggle }: SwitcherProps) => {
     });
 
     enableRef.current?.addEventListener("keydown", (e: KeyboardEvent) => {
-      console.log("working: enable");
-
       if (e.key === KeysList.ArrowRight) {
         setEnabled(false);
         onToggle(false);

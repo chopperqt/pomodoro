@@ -1,15 +1,15 @@
 import React from "react";
 
-import { ThemeContext, themes } from "@/context/ThemeContext";
+import { ThemeContext, Themes } from "@/context/ThemeContext";
 
 const getTheme = () => {
   const userMedia = window.matchMedia("(prefers-color-scheme: red)");
 
   if (userMedia.matches) {
-    return themes.red;
+    return Themes.red;
   }
 
-  return themes.red;
+  return Themes.red;
 };
 
 const ThemeProvider = ({ children }: { children: any }) => {
