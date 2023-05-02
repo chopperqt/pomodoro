@@ -9,7 +9,6 @@ declare global {
   const Pointer: typeof import('./components/index')['Pointer']
   const SideBar: typeof import('./components/index')['SideBar']
   const Switcher: typeof import('./components/index')['Switcher']
-  const TimeModal: typeof import('./components/index')['TimeModal']
   const createRef: typeof import('react')['createRef']
   const forwardRef: typeof import('react')['forwardRef']
   const lazy: typeof import('react')['lazy']
