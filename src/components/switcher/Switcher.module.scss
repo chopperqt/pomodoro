@@ -1,51 +1,60 @@
-@import '@/assets/colors.module.scss';
+@import "@/assets/colors.module.scss";
+@import "@/assets/media.module.scss";
 
 .layout {
-	background: var(--primary-color);
-	padding: 10px; 
-	justify-content: center;
-	border-radius: 3px;
-	color: $white-color;
-	display: flex;
-	align-items: center;
-	text-transform: uppercase;
-	border: none;
-	column-gap: 20px;
-	transition: .3s;
+  background: var(--primary-color);
+  padding: 10px;
+  justify-content: center;
+  border-radius: 3px;
+  color: $white-color;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  border: none;
+  column-gap: 20px;
+  transition: 0.3s;
 
-	&:focus {
-		outline: none;
-		background: var(--accent-color);
-	}
+  &:focus {
+    outline: none;
+    background: var(--accent-color);
+  }
 
-	&:disabled {
-		pointer-events: none;
-	}
+  &:disabled {
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    padding: 5px;
+  }
 }
 
 .button {
-	font-size: 1.2em;
-	padding: 8px 13px;
-	border: none;
-	color: $white-color;
-	cursor: pointer;
-	border-radius: 3px;
-	background-color: var(--dark-primary-color);
-	opacity: 0.5;
-	transition: .2s;
+  font-size: 1.2em;
+  padding: 8px 13px;
+  border: none;
+  color: $white-color;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: var(--dark-primary-color);
+  opacity: 0.5;
+  transition: 0.2s;
 
-	&:hover {
-		opacity: 0.8;
-	}
+  &:hover {
+    opacity: 0.8;
+  }
 
-	&Active {
-		background-color: var(--dark-primary-color);
-		opacity: 1;
-		cursor: pointer;
+  &Active {
+    background-color: var(--dark-primary-color);
+    opacity: 1;
+    cursor: pointer;
 
-		&:hover
-		 {
-			opacity: 1;
-		}
-	}
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 14px;
+    padding: 4px 7px;
+  }
 }
