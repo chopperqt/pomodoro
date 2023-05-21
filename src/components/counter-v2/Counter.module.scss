@@ -1,44 +1,58 @@
-@import '@/assets/colors.module.scss';
- 
+@import "@/assets/colors.module.scss";
+@import "@/assets/media.module.scss";
+
 .layout {
   background-color: var(--primary-color);
   display: flex;
   padding: 10px 10px;
   align-items: center;
   justify-content: center;
-  column-gap: 15px; 
+  column-gap: 15px;
   border-radius: 3px;
+
+  @media screen and (max-width: $break-point-mobile) {
+    padding: 5px 5px;
+    column-gap: 5px;
+  }
 }
 
 .text {
-	text-align: center;
-	font-size: 24px;
-	width: 25px;
+  text-align: center;
+  font-size: 24px;
+  width: 25px;
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 16px;
+  }
 }
 
 .button {
-	font-size: 1.2em;
-	padding: 8px 13px;
-	border: none;
-	color: $white-color;
-	cursor: pointer;
-	border-radius: 3px;
-	background-color: var(--dark-primary-color);
-	opacity: 0.8;
-	transition: .2s;
+  font-size: 1.2em;
+  padding: 8px 13px;
+  border: none;
+  color: $white-color;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: var(--dark-primary-color);
+  opacity: 0.8;
+  transition: 0.2s;
 
-	&:hover {
-		opacity: 1;
-	}
+  &:hover {
+    opacity: 1;
+  }
 
-	&Active {
-		background-color: var(--dark-primary-color);
-		opacity: 1;
-		cursor: pointer;
+  &Active {
+    background-color: var(--dark-primary-color);
+    opacity: 1;
+    cursor: pointer;
 
-		&:hover
-		 {
-			opacity: 1;
-		}
-	}
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 14px;
+    padding: 4px 7px;
+  }
 }

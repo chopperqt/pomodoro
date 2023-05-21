@@ -1,112 +1,155 @@
-@import '@/assets/colors.module.scss';
-@import '@/assets/media.module.scss';
+@import "@/assets/colors.module.scss";
+@import "@/assets/media.module.scss";
 
 .layout {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .timer {
-	font-size: 10em;
-	font-family: 'RobotoMonoBold';
+  font-size: 10em;
+  font-family: "RobotoMonoBold";
 
-	@media screen and (max-width: $break-point-table) {
-		font-size: 7em;
-	}
+  @media screen and (max-width: $break-point-table) {
+    font-size: 7em;
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 5em;
+  }
 }
 
 .timerTimeout {
-	font-size: 3em;
-	font-family: 'RobotoMonoBold';
+  font-size: 3em;
+  font-family: "RobotoMonoBold";
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 3em;
+  }
 }
 
 .wrap {
-	display: flex;
-	column-gap: 10px;
-	flex-direction: column;
+  display: flex;
+  column-gap: 10px;
+  flex-direction: column;
 }
 
 .button {
-	padding: 15px;
-	border-radius: 5px;
-	color: var(--primary-color);
-	border: none;
-	font-size: 2em;
-	margin-top: 50px;
-	font-weight: 700;
-	text-transform: uppercase;
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
-	background-color: $white-color;
-	border-radius: 99999px;
-	cursor: pointer;
+  padding: 15px;
+  border-radius: 5px;
+  color: var(--primary-color);
+  border: none;
+  font-size: 2em;
+  margin-top: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  background-color: $white-color;
+  border-radius: 99999px;
+  cursor: pointer;
 
-	&Restart {
-		display: flex;
-		justify-content: center;
-		height: 69px;
-		width: 69px;
-		padding: 0;
-		border-radius: 100%;
-	}
+  &Restart {
+    display: flex;
+    justify-content: center;
+    height: 69px;
+    width: 69px;
+    padding: 0;
+    border-radius: 100%;
+  }
 
-	&Disabled {
-		opacity: 0.7;
-	}
+  &Disabled {
+    opacity: 0.7;
+  }
 
-	&Wrap {
-		display: flex;
-		column-gap: 20px;
-	}
+  &Wrap {
+    display: flex;
+    column-gap: 20px;
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 1em;
+    padding: 5px;
+    margin-top: 15px;
+    column-gap: 3px;
+
+    &Restart {
+      height: 40px;
+      width: 40px;
+    }
+  }
 }
 
 .text {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	color: $white-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $white-color;
 
-	&Layout {
-		width: 400px;
-		position: fixed;
-		bottom: 20px;
-		display: flex;
-		flex-direction: column;
-		row-gap: 15px;
-		margin-top: 30px;
-		background: rgba(var(--light-primary-color-rgb), 0.2);
-		border-radius: 16px;
-		padding: 15px;
-	}
+  &Layout {
+    width: 400px;
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-top: 30px;
+    background: rgba(var(--light-primary-color-rgb), 0.2);
+    border-radius: 16px;
+    padding: 15px;
+  }
 
-	&Wrap {
-		display: flex;
-		align-items: center;
-	}
+  &Wrap {
+    display: flex;
+    align-items: center;
+  }
 
-	&Key {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 30px;
-		min-width: 30px;
-		border-radius: 5px;
-		height: fit-content;
-		color: $white-color;
-		border: 2px solid $white-color;
-		margin: 0 5px 0 5px;
-		height: 30px;
+  &Key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    min-width: 30px;
+    border-radius: 5px;
+    height: fit-content;
+    color: $white-color;
+    border: 2px solid $white-color;
+    margin: 0 5px 0 5px;
+    height: 30px;
 
-		&Shift {
-			width: 40px;
-		}
+    &Shift {
+      width: 40px;
+    }
 
-		&Enter {
-			width: 94px;
-		}
-	}
+    &Enter {
+      width: 94px;
+    }
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 14px;
+
+    &Key {
+      width: 20px;
+      height: 20px;
+
+      &Shift {
+        width: 30px;
+      }
+
+      &Enter {
+        width: 82px;
+      }
+    }
+
+    &Layout {
+      width: 300px;
+      bottom: 10px;
+      padding: 10px;
+    }
+  }
 }

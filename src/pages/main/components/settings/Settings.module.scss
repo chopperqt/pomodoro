@@ -1,14 +1,28 @@
+@import "@/assets/media.module.scss";
+
 .layout {
   display: grid;
   grid-row-gap: 15px;
+
+  @media screen and (max-width: $break-point-mobile) {
+    grid-row-gap: 5px;
+  }
 }
 
 .wrapper {
   display: grid;
   row-gap: 5px;
   text-align: center;
-} 
+
+  @media screen and (max-width: $break-point-mobile) {
+    justify-content: center;
+  }
+}
 
 .wrapperText {
   font-size: 18px;
+
+  @media screen and (max-width: $break-point-mobile) {
+    font-size: 16px;
+  }
 }

@@ -1,18 +1,28 @@
-@import '@/assets/colors.module.scss';
+@import "@/assets/colors.module.scss";
+@import "@/assets/media.module.scss";
 
 .layout {
-	display: flex;
-	column-gap: 10px;
-	justify-content: center;
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+
+  @media screen and (max-width: $break-point-mobile) {
+    column-gap: 5px;
+  }
 }
 
 .point {
-	width: 15px;
-	height: 15px;
-	background-color: $white-color;
-	border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: $white-color;
+  border-radius: 50%;
 
-	&Active {
-		background-color: var(--accent-color);
-	}
+  &Active {
+    background-color: var(--accent-color);
+  }
+
+  @media screen and (max-width: $break-point-mobile) {
+    width: 10px;
+    height: 10px;
+  }
 }
