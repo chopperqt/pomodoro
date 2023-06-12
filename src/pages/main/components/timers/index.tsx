@@ -19,6 +19,7 @@ import { getOpacity } from "../../helpers/getOpacity";
 import { useTimer } from "../../hooks/useTimer";
 
 import styles from "./Timer.module.scss";
+import { Animations } from "../../constants";
 
 const defaultAnimate = {
   whileTap: { scale: 0.95 },
@@ -62,6 +63,7 @@ export const Timers = () => {
     handleResetPomodoro,
     handleResetTimeout,
   });
+
   let icon = faPlay;
   let text = "Start";
 
@@ -72,77 +74,56 @@ export const Timers = () => {
     text = "Pause";
   }
 
-  console.log("isMenuOpen: ", isMenuOpen);
-
   const formattedTimeout = getFormateTime(timerTimeout);
   const formattedPomodoro = getFormateTime(timerPomodoro);
 
-  const animatePomodoro = getOpacity(!isFinishedPomodoro);
-  const animateTimeout = getOpacity(isFinishedPomodoro);
-
   return (
-    <ThemeContext.Consumer>
-      {(context: any) => {
-        context?.setTheme(isFinishedPomodoro ? Themes.green : Themes.red);
-
-        return (
-          <div
-            className={cx(styles.layout, {
-              [styles.layoutDisable]: isMenuOpen,
-            })}
-          >
-            <Pointer
-              amountOfCompletePoints={amountOfCompletedPoints}
-              amountOfPoints={amountOfRepeats}
-            />
-            <motion.div
-              animate={{
-                opacity: [0, 1],
-                y: [20, 0],
-                transition: {
-                  delay: 0.2,
-                },
-              }}
-              className={cx(styles.timer, "text-white")}
-            >
-              {formattedPomodoro}
-            </motion.div>
-            <motion.div
-              animate={{
-                opacity: [0, 1],
-                y: [20, 0],
-                transition: {
-                  delay: 0.4,
-                },
-              }}
-              className={cx(styles.timerTimeout, "text-white")}
-            >
-              {formattedTimeout}
-            </motion.div>
-            <div className={styles.buttonWrap}>
-              <motion.button
-                onClick={handleToggle}
-                className={styles.button}
-                {...defaultAnimate}
-              >
-                <FontAwesomeIcon icon={icon} />
-                <div className={styles.buttonText}>{text}</div>
-              </motion.button>
-              <motion.button
-                className={cx(styles.button, styles.buttonRestart, {
-                  [styles.buttonDisabled]: isStart,
-                })}
-                onClick={handleReset}
-                disabled={isStart}
-                {...defaultAnimate}
-              >
-                <FontAwesomeIcon icon={faRefresh} />
-              </motion.button>
-            </div>
-            <Hotkeys />
-          </div>
-        );
-      }}
-    </ThemeContext.Consumer>
+    <div
+      className={cx(styles.layout, {
+        [styles.layoutDisable]: isMenuOpen,
+      })}
+    >
+      <Pointer
+        amountOfCompletePoints={amountOfCompletedPoints}
+        amountOfPoints={amountOfRepeats}
+      />
+      <motion.div
+        animate={Animations.timer}
+        className={cx(styles.timer, "text-white", {
+          [styles.timerDisabled]: isFinishedPomodoro,
+        })}
+      >
+        {formattedPomodoro}
+      </motion.div>
+      <motion.div
+        animate={Animations.timeout}
+        className={cx(styles.timerTimeout, "text-white", {
+          [styles.timerTimeoutDisabled]: !isFinishedPomodoro,
+        })}
+      >
+        {formattedTimeout}
+      </motion.div>
+      <motion.div animate={Animations.actions} className={styles.buttonWrap}>
+        <motion.button
+          onClick={handleToggle}
+          className={styles.button}
+          {...defaultAnimate}
+        >
+          <FontAwesomeIcon icon={icon} />
+          <div className={styles.buttonText}>{text}</div>
+        </motion.button>
+        <motion.button
+          className={cx(styles.button, styles.buttonRestart, {
+            [styles.buttonDisabled]: isStart,
+          })}
+          onClick={handleReset}
+          disabled={isStart}
+          {...defaultAnimate}
+        >
+          <FontAwesomeIcon icon={faRefresh} />
+        </motion.button>
+      </motion.div>
+      <Hotkeys />
+    </div>
   );
 };

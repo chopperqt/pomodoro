@@ -21,6 +21,10 @@
   font-family: "RobotoMonoBold";
   line-height: 0.85;
 
+  &Disabled {
+    color: $page-secondary-color;
+  }
+
   @media screen and (max-width: $break-point-table) {
     font-size: 7em;
   }
@@ -33,6 +37,10 @@
 .timerTimeout {
   font-size: 3em;
   font-family: "RobotoMonoBold";
+
+  &Disabled {
+    color: $page-secondary-color;
+  }
 
   @media screen and (max-width: $break-point-mobile) {
     font-size: 1.5em;
