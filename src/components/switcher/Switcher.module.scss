@@ -2,7 +2,7 @@
 @import "@/assets/media.module.scss";
 
 .layout {
-  background: var(--primary-color);
+  background: $page-secondary-color;
   padding: 10px;
   justify-content: center;
   border-radius: 3px;
@@ -35,7 +35,7 @@
   color: $white-color;
   cursor: pointer;
   border-radius: 3px;
-  background-color: var(--dark-primary-color);
+  background-color: $button-primary-color;
   opacity: 0.5;
   transition: 0.2s;
 
@@ -44,7 +44,6 @@
   }
 
   &Active {
-    background-color: var(--dark-primary-color);
     opacity: 1;
     cursor: pointer;
 
