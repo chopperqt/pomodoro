@@ -37,7 +37,7 @@
   top: 0;
   bottom: 0;
   width: 330px;
-  background: $white-color;
+  background-color: $page-color;
 
   @media screen and (max-width: $break-point-mobile) {
     width: 250px;
@@ -57,7 +57,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: $white-color;
+  background-color: $page-color;
   z-index: 10;
 
   &:disabled {
