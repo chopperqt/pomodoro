@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  row-gap: 10px;
   justify-content: center;
   height: 100vh;
   position: relative;
@@ -18,6 +19,8 @@
 .timer {
   font-size: 10em;
   font-family: "RobotoMonoBold";
+  line-height: 0.85;
+  height: 150px;
 
   @media screen and (max-width: $break-point-table) {
     font-size: 7em;

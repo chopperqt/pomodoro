@@ -96,13 +96,25 @@ export const Timers = () => {
               amountOfPoints={amountOfRepeats}
             />
             <motion.div
-              animate={animatePomodoro}
+              animate={{
+                opacity: [0, 1],
+                y: [20, 0],
+                transition: {
+                  delay: 0.2,
+                },
+              }}
               className={cx(styles.timer, "text-white")}
             >
               {formattedPomodoro}
             </motion.div>
             <motion.div
-              animate={animateTimeout}
+              animate={{
+                opacity: [0, 1],
+                y: [20, 0],
+                transition: {
+                  delay: 0.4,
+                },
+              }}
               className={cx(styles.timerTimeout, "text-white")}
             >
               {formattedTimeout}
