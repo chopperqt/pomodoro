@@ -12,7 +12,7 @@
   z-index: 99;
 
   &Disable {
-    z-index: 1;
+    z-index: 0;
   }
 }
 
@@ -20,7 +20,6 @@
   font-size: 10em;
   font-family: "RobotoMonoBold";
   line-height: 0.85;
-  height: 150px;
 
   @media screen and (max-width: $break-point-table) {
     font-size: 7em;
@@ -47,9 +46,11 @@
 }
 
 .button {
+  display: flex;
+  justify-content: center;
   padding: 15px;
   border-radius: 5px;
-  color: var(--primary-color);
+  color: $white-color;
   border: none;
   font-size: 2em;
   margin-top: 50px;
@@ -58,7 +59,7 @@
   display: flex;
   align-items: center;
   column-gap: 10px;
-  background-color: $white-color;
+  background-color: $page-color;
   border-radius: 99999px;
   cursor: pointer;
 
@@ -80,15 +81,25 @@
     column-gap: 20px;
   }
 
+  &Text {
+    color: $white-color;
+  }
+
   @media screen and (max-width: $break-point-mobile) {
     font-size: 1em;
     padding: 5px;
     margin-top: 15px;
     column-gap: 3px;
+    height: 40px;
+    width: 40px;
 
     &Restart {
       height: 40px;
       width: 40px;
+    }
+
+    &Text {
+      display: none;
     }
   }
 }

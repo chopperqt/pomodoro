@@ -14,11 +14,11 @@
 .point {
   width: 15px;
   height: 15px;
-  background-color: $white-color;
+  background-color: $page-color;
   border-radius: 50%;
 
   &Active {
-    background-color: var(--accent-color);
+    background-color: $white-color;
   }
 
   @media screen and (max-width: $break-point-mobile) {
