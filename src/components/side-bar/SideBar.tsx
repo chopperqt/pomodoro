@@ -15,7 +15,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: "circle(30px at 40px 40px)",
+    clipPath: "circle(25px at 40px 40px)",
     transition: {
       delay: 0.5,
       type: "spring",
@@ -42,12 +42,18 @@ const variants = {
   },
 };
 
+const AnimeteKey = {
+  open: "open",
+  closed: "closed",
+};
+
 interface SideBarProps {
   isOpened: boolean;
   onToggle: Cycle;
   children: React.ReactElement | React.ReactElement[];
   isDisabled?: boolean;
 }
+
 const SideBar = ({
   children,
   isOpened,
@@ -73,12 +79,14 @@ const SideBar = ({
     setHeight(containerRef.current.clientHeight);
   }, [containerRef]);
 
+  const animate = isOpened ? AnimeteKey.open : AnimeteKey.closed;
+
   return (
     <>
       <motion.nav
         ref={containerRef}
         initial={false}
-        animate={isOpened ? "open" : "closed"}
+        animate={animate}
         custom={height}
         className={cx(styles.content, {
           [styles.contentDisabled]: isDisabled,

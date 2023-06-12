@@ -4,14 +4,19 @@ import { faPlay, faPause, faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import cx from "classnames";
 
-import { getAmountOfRepeats, getTime, getTimeout } from "@/service/settings";
+import {
+  getAmountOfRepeats,
+  getMenuStatus,
+  getTime,
+  getTimeout,
+} from "@/service/settings";
 import { ThemeContext, Themes } from "@/context/ThemeContext";
 
 import { Hotkeys } from "./partials/Hotkeys";
 import { getFormateTime } from "../../helpers/getFormateTime";
 import { useTimers } from "../../hooks/useTimers";
 import { getOpacity } from "../../helpers/getOpacity";
-import { useTimer } from '../../hooks/useTimer'
+import { useTimer } from "../../hooks/useTimer";
 
 import styles from "./Timer.module.scss";
 
@@ -24,6 +29,7 @@ export const Timers = () => {
   const time = useSelector(getTime);
   const timeout = useSelector(getTimeout);
   const amountOfRepeats = useSelector(getAmountOfRepeats);
+  const isMenuOpen = useSelector(getMenuStatus);
 
   const {
     handleToggle: handleTogglePomodoro,
@@ -33,7 +39,7 @@ export const Timers = () => {
     isStarted: isStartedPomodoro,
   } = useTimer({
     time,
-  })
+  });
 
   const {
     handleToggle: handleToggleTimeout,
@@ -41,13 +47,9 @@ export const Timers = () => {
     timer: timerTimeout,
     isStarted: isStartedTimeout,
     isFinished: isFinishedTimeout,
-  } = useTimer({ time: timeout })
+  } = useTimer({ time: timeout });
 
-  const {
-    handleToggle,
-    amountOfCompletedPoints,
-    handleReset
-  } = useTimers({
+  const { handleToggle, amountOfCompletedPoints, handleReset } = useTimers({
     amountOfRepeats,
     isPomodoro: isStartedPomodoro,
     isTimeout: isStartedTimeout,
@@ -59,22 +61,24 @@ export const Timers = () => {
     handleTogglePomodoro,
     handleResetPomodoro,
     handleResetTimeout,
-  })
+  });
   let icon = faPlay;
   let text = "Start";
 
-  const isStart = isStartedPomodoro || isStartedTimeout
+  const isStart = isStartedPomodoro || isStartedTimeout;
 
   if (isStart) {
     icon = faPause;
     text = "Pause";
   }
 
-  const formattedTimeout = getFormateTime(timerTimeout)
-  const formattedPomodoro = getFormateTime(timerPomodoro)
+  console.log("isMenuOpen: ", isMenuOpen);
 
-  const animatePomodoro = getOpacity(!isFinishedPomodoro)
-  const animateTimeout = getOpacity(isFinishedPomodoro)
+  const formattedTimeout = getFormateTime(timerTimeout);
+  const formattedPomodoro = getFormateTime(timerPomodoro);
+
+  const animatePomodoro = getOpacity(!isFinishedPomodoro);
+  const animateTimeout = getOpacity(isFinishedPomodoro);
 
   return (
     <ThemeContext.Consumer>
@@ -82,7 +86,11 @@ export const Timers = () => {
         context?.setTheme(isFinishedPomodoro ? Themes.green : Themes.red);
 
         return (
-          <div className={styles.layout}>
+          <div
+            className={cx(styles.layout, {
+              [styles.layoutDisable]: isMenuOpen,
+            })}
+          >
             <Pointer
               amountOfCompletePoints={amountOfCompletedPoints}
               amountOfPoints={amountOfRepeats}
@@ -92,7 +100,7 @@ export const Timers = () => {
               className={cx(styles.timer, "text-white")}
             >
               {formattedPomodoro}
-            </motion.div >
+            </motion.div>
             <motion.div
               animate={animateTimeout}
               className={cx(styles.timerTimeout, "text-white")}

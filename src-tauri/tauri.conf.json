@@ -97,15 +97,15 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 800,
+        "height": 400,
         "resizable": true,
         "title": "Pomodoro",
-        "width": 1000,
-        "minHeight": 500,
+        "width": 550,
+        "minHeight": 400,
         "minWidth": 550,
         "label": "Pomodoro",
         "transparent": true,
-        "decorations": true
+        "decorations": false
       }
     ],
     "systemTray": {

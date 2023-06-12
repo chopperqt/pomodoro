@@ -7,6 +7,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: relative;
+  z-index: 99;
+
+  &Disable {
+    z-index: 1;
+  }
 }
 
 .timer {
@@ -18,7 +24,7 @@
   }
 
   @media screen and (max-width: $break-point-mobile) {
-    font-size: 5em;
+    font-size: 3em;
   }
 }
 
@@ -27,7 +33,7 @@
   font-family: "RobotoMonoBold";
 
   @media screen and (max-width: $break-point-mobile) {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 }
 
@@ -142,7 +148,7 @@
       }
 
       &Enter {
-        width: 82px;
+        width: 80px;
       }
     }
 
