@@ -1,7 +1,8 @@
 import { Cycle, motion } from "framer-motion";
 import cx from "classnames";
 
-import { MenuToggle } from "./components/MenuToggle";
+import { Burger } from "./partials/Burger";
+import { useSideBar } from "./hooks/useSideBar";
 
 import styles from "./styles.module.scss";
 
@@ -60,24 +61,10 @@ const SideBar = ({
   onToggle,
   isDisabled,
 }: SideBarProps) => {
-  const containerRef = useRef<HTMLElement | null>(null);
-  const [height, setHeight] = useState(0);
-
-  const handleToggle = () => {
-    if (isDisabled) {
-      return;
-    }
-
-    onToggle();
-  };
-
-  useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-
-    setHeight(containerRef.current.clientHeight);
-  }, [containerRef]);
+  const { height, containerRef, handleToggle } = useSideBar({
+    isDisabled,
+    onToggle,
+  });
 
   const animate = isOpened ? AnimeteKey.open : AnimeteKey.closed;
 
@@ -96,7 +83,7 @@ const SideBar = ({
         <motion.div variants={variants} className={styles.wrap}>
           {children}
         </motion.div>
-        <MenuToggle toggle={handleToggle} />
+        <Burger toggle={handleToggle} />
       </motion.nav>
     </>
   );
