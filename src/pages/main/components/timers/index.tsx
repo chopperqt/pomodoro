@@ -126,7 +126,7 @@ export const Timers = () => {
                 {...defaultAnimate}
               >
                 <FontAwesomeIcon icon={icon} />
-                {text}
+                <div className={styles.buttonText}>{text}</div>
               </motion.button>
               <motion.button
                 className={cx(styles.button, styles.buttonRestart, {
