@@ -1,21 +1,28 @@
-@import '@/assets/colors.module.scss';
+@import "@/assets/colors.module.scss";
 
-h1, h2, h3, h4, h5, p, span, div {
-	color: $text-primary-color;
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span,
+div {
+  color: $text-primary-color;
 }
 
 .no-click {
-	pointer-events: none;
+  pointer-events: none;
 }
 
 .text-secondary {
-	color: $light-primary-color;
+  color: $light-primary-color;
 }
 
 .text-bold {
-	font-family: 'MontserratBold';
+  font-family: "MontserratBold";
 }
 
 .text-white {
-	color: $white-color !important;
-} 
+  color: $white-color;
+}
