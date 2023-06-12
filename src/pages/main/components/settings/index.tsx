@@ -1,18 +1,24 @@
-import { onSetAmountOfRepeats, onSetTime, onSetTimeout } from "@/service/settings"
-import { useDispatch } from "react-redux"
-import { TimerKey, Timers } from "../../constants"
-import { useSettings } from "../../hooks/useSettings"
-import { CounterPreview } from "./partials/CounterPreview"
-import { TogglePreview } from "./partials/TogglePreview"
+import { useDispatch } from "react-redux";
 
-import styles from './Settings.module.scss'
+import {
+  onSetAmountOfRepeats,
+  onSetTime,
+  onSetTimeout,
+} from "@/service/settings";
 
-const AUTOSTART_TEXT = 'Auto-start'
+import { TimerKey, Timers } from "../../constants";
+import { useSettings } from "../../hooks/useSettings";
+import { CounterPreview } from "./partials/CounterPreview";
+import { TogglePreview } from "./partials/TogglePreview";
+
+import styles from "./Settings.module.scss";
+
+const AUTOSTART_TEXT = "Auto-start";
 
 export const Settings = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { isOpened, toggleOpen, isSettingsDisabled } = useSettings()
+  const { isOpened, toggleOpen, isSettingsDisabled } = useSettings();
 
   return (
     <SideBar
@@ -36,10 +42,9 @@ export const Settings = () => {
         <TogglePreview
           label={AUTOSTART_TEXT}
           isActive={false}
-          onToggle={() => { }}
+          onToggle={() => {}}
         />
       </div>
     </SideBar>
-
-  )
-}
+  );
+};

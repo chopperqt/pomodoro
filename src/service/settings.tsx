@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
 
@@ -47,21 +47,17 @@ export const settingsStore = createSlice({
   },
 });
 
-const state = (state: RootState) => state.settingsStore;
+export const getTime = (state: RootState) => state.settingsStore.time;
+export const getTimeout = (state: RootState) => state.settingsStore.timeout;
+export const getAmountOfRepeats = (state: RootState) =>
+  state.settingsStore.amountOfRepeats;
+export const getAutoStart = (state: RootState) =>
+  state.settingsStore.isAutoStart;
+export const getMenuStatus = (state: RootState) =>
+  state.settingsStore.isMenuOpen;
 
-export const getTime = createSelector(state, (state) => state.time);
-export const getTimeout = createSelector(state, (state) => state.timeout);
-export const getAmountOfRepeats = createSelector(
-  state,
-  (state) => state.amountOfRepeats
-);
-export const getAutoStart = createSelector(state, (state) => state.isAutoStart);
-export const getMenuOpen = createSelector(state, (state) => state.isMenuOpen);
-
-export const getSettingsDisabled = createSelector(
-  state,
-  (state) => state.isSettingsDisabled
-);
+export const getSettingsDisabled = (state: RootState) =>
+  state.settingsStore.isSettingsDisabled;
 
 export const {
   onSetAmountOfRepeats,

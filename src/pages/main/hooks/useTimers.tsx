@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  getMenuOpen,
+  getMenuStatus,
   onSetMenuOpen,
   onSetSettingsDisable,
 } from "@/service/settings";
@@ -10,7 +10,7 @@ import { createNotification } from "@/helpers/createNotification";
 const END_POMODORO_TEXT = "30 seconds until the end of the pomodoro.";
 const END_TIMEOUT_TEXT = "30 seconds until the end of the timeout.";
 
-const NOTIFICATION_TIME = 30
+const NOTIFICATION_TIME = 30;
 
 interface UseTimerProps {
   timerPomodoro: number;
@@ -18,12 +18,12 @@ interface UseTimerProps {
   amountOfRepeats: number;
   isPomodoro: boolean;
   isTimeout: boolean;
-  isFinishedPomodoro: boolean
-  isFinishedTimeout: boolean
-  handleTogglePomodoro: () => void
-  handleToggleTimeout: () => void
-  handleResetPomodoro: () => void
-  handleResetTimeout: () => void
+  isFinishedPomodoro: boolean;
+  isFinishedTimeout: boolean;
+  handleTogglePomodoro: () => void;
+  handleToggleTimeout: () => void;
+  handleResetPomodoro: () => void;
+  handleResetTimeout: () => void;
 }
 
 export const useTimers = ({
@@ -43,21 +43,21 @@ export const useTimers = ({
 
   const [amountOfCompletedPoints, setAmountOfCompletedPoints] = useState(0);
 
-  const isMenuOpen = useSelector(getMenuOpen);
+  const isMenuOpen = useSelector(getMenuStatus);
 
   const isFinishedSessia = useMemo(() => {
-    return isFinishedTimeout && isFinishedPomodoro
-  }, [isFinishedPomodoro, isFinishedTimeout])
+    return isFinishedTimeout && isFinishedPomodoro;
+  }, [isFinishedPomodoro, isFinishedTimeout]);
 
   const handleToggle = () => {
     if (!isFinishedPomodoro) {
-      handleTogglePomodoro()
+      handleTogglePomodoro();
 
-      return
+      return;
     }
 
-    handleToggleTimeout()
-  }
+    handleToggleTimeout();
+  };
 
   const handleHotKeyController = (e: KeyboardEvent) => {
     if (e.code !== "Space") {
@@ -66,26 +66,26 @@ export const useTimers = ({
   };
 
   const handleResetTimers = () => {
-    handleResetPomodoro()
-    handleResetTimeout()
-  }
+    handleResetPomodoro();
+    handleResetTimeout();
+  };
 
   const handleReset = () => {
-    setAmountOfCompletedPoints(0)
-    handleResetTimers()
-  }
+    setAmountOfCompletedPoints(0);
+    handleResetTimers();
+  };
 
   useEffect(() => {
     if (!isFinishedSessia) {
-      return
+      return;
     }
 
     if (amountOfCompletedPoints < amountOfRepeats) {
-      setAmountOfCompletedPoints((prev) => prev + 1)
+      setAmountOfCompletedPoints((prev) => prev + 1);
     }
 
-    handleResetTimers()
-  }, [isFinishedSessia])
+    handleResetTimers();
+  }, [isFinishedSessia]);
 
   useEffect(() => {
     if (isPomodoro || isTimeout) {
@@ -103,23 +103,23 @@ export const useTimers = ({
 
   useEffect(() => {
     if (timerPomodoro !== NOTIFICATION_TIME) {
-      return
+      return;
     }
 
     createNotification({
       text: END_POMODORO_TEXT,
-    })
+    });
   }, [timerPomodoro]);
 
   useEffect(() => {
     if (timerTimeout !== NOTIFICATION_TIME) {
-      return
+      return;
     }
 
     createNotification({
       text: END_TIMEOUT_TEXT,
-    })
-  }, [timerTimeout])
+    });
+  }, [timerTimeout]);
 
   useEffect(() => {
     if (isMenuOpen) {

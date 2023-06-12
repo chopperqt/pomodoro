@@ -1,35 +1,41 @@
-@import 'assets/colors.module.scss';
+@import "assets/colors.module.scss";
 
 :root[data-theme="red"] {
-	--primary-color: #F44336;
-	--dark-primary-color: #D32F2F;
-	--accent-color: #FF4081;
-	--light-primary-color: #FFCDD2;
-	--light-primary-color-rgb: 255, 205, 210;
+  --primary-color: #f44336;
+  --dark-primary-color: #d32f2f;
+  --accent-color: #ff4081;
+  --light-primary-color: #ffcdd2;
+  --light-primary-color-rgb: 255, 205, 210;
 }
 
 :root[data-theme="green"] {
-	--primary-color: #4CAF50;
-	--dark-primary-color: #388E3C;
-	--accent-color: #8BC34A;
-	--light-primary-color: #C8E6C9;
-	--light-primary-color-rgb: 200, 230, 201;
+  --primary-color: #4caf50;
+  --dark-primary-color: #388e3c;
+  --accent-color: #8bc34a;
+  --light-primary-color: #c8e6c9;
+  --light-primary-color-rgb: 200, 230, 201;
 }
 
 body {
-	background-color: var(--primary-color);
-	margin: 0;
-	padding: 0;
+  background-color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  border-radius: 8px;
+  background: transparent;
+  overflow: hidden;
 }
 
 .App {
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 * {
-	font-family: 'MontserratRegular';
+  font-family: "MontserratRegular";
 }

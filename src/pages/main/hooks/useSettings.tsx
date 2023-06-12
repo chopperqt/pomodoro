@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  getMenuOpen,
+  getMenuStatus,
   onSetMenuOpen,
   getSettingsDisabled,
 } from "@/service/settings";
 
 export const useSettings = () => {
   const dispatch = useDispatch();
-  const isOpened = useSelector(getMenuOpen);
+  const isOpened = useSelector(getMenuStatus);
   const isSettingsDisabled = useSelector(getSettingsDisabled);
 
   const hotKeyRef = useRef<boolean>(false);
