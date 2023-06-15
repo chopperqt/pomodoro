@@ -1,11 +1,11 @@
-import { appWindow } from '@tauri-apps/api/window'
+import { appWindow } from "@tauri-apps/api/window";
 
 document
-  .getElementById('titlebar-minimize')
-  .addEventListener('click', () => appWindow.minimize())
+  .getElementById("titlebar-minimize")
+  .addEventListener("click", () => appWindow.minimize());
 document
-  .getElementById('titlebar-maximize')
-  .addEventListener('click', () => appWindow.toggleMaximize())
+  .getElementById("titlebar-maximize")
+  .addEventListener("click", () => appWindow.setFullscreen(true));
 document
-  .getElementById('titlebar-close')
-  .addEventListener('click', () => appWindow.close())
+  .getElementById("titlebar-close")
+  .addEventListener("click", () => appWindow.close());

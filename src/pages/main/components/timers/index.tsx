@@ -10,12 +10,10 @@ import {
   getTime,
   getTimeout,
 } from "@/service/settings";
-import { ThemeContext, Themes } from "@/context/ThemeContext";
 
 import { Hotkeys } from "./partials/Hotkeys";
 import { getFormateTime } from "../../helpers/getFormateTime";
 import { useTimers } from "../../hooks/useTimers";
-import { getOpacity } from "../../helpers/getOpacity";
 import { useTimer } from "../../hooks/useTimer";
 
 import styles from "./Timer.module.scss";
@@ -123,7 +121,6 @@ export const Timers = () => {
           <FontAwesomeIcon icon={faRefresh} />
         </motion.button>
       </motion.div>
-      <Hotkeys />
     </div>
   );
 };

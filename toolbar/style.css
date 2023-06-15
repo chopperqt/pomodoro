@@ -1,24 +1,66 @@
 .titlebar {
-  height: 30px;
+  padding: 8px;
   background: var(--background-color);
   user-select: none;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   position: fixed;
   top: 0px;
   left: 0;
-  right: 0px; 
+  right: 0px;
+  z-index: 999;
+  column-gap: 7px;
+  padding-bottom: 0px;
+}
+
+.close-button {
+  background-color: #ed695e;
+}
+
+.close-button:hover {
+  background-color: #e3988b;
+}
+
+.minimize-button {
+  background-color: #f4bf4f;
+}
+
+.minimize-button:hover {
+  background-color: #f8eb86;
+}
+
+.maximize-button {
+  background-color: #61c553;
 }
 
 .titlebar-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
   cursor: pointer;
 }
 
-.titlebar-button:hover { 
-  background: var(--dark-primary-color);
-}
+/* .titlebar { */
+/*   height: 30px; */
+/*   background: var(--background-color); */
+/*   user-select: none; */
+/*   display: flex; */
+/*   justify-content: flex-end; */
+/*   position: fixed; */
+/*   top: 0px; */
+/*   left: 0; */
+/*   right: 0px;  */
+/* } */
+/**/
+/* .titlebar-button { */
+/*   display: inline-flex; */
+/*   justify-content: center; */
+/*   align-items: center; */
+/*   width: 30px; */
+/*   height: 30px; */
+/*   cursor: pointer; */
+/* } */
+/**/
+/* .titlebar-button:hover {  */
+/*   background: var(--dark-primary-color); */
+/* } */
