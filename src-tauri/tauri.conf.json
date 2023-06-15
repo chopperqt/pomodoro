@@ -100,7 +100,7 @@
         "height": 400,
         "resizable": true,
         "title": "Pomodoro",
-        "width": 550,
+        "width": 500,
         "minHeight": 400,
         "minWidth": 550,
         "label": "Pomodoro",

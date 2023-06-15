@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 
 const sidebar = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    clipPath: `circle(${height * 2 + 200}px at 55px 55px)`,
     transition: {
       type: "spring",
       stiffness: 90,
@@ -16,7 +16,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: "circle(25px at 40px 40px)",
+    clipPath: "circle(25px at 55px 55px)",
     transition: {
       delay: 0.5,
       type: "spring",
