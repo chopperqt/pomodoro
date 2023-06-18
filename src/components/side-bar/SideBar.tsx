@@ -1,7 +1,7 @@
 import { Cycle, motion } from "framer-motion";
 import cx from "classnames";
 
-import { Burger } from "./partials/Burger";
+import { Burger } from "./partials/burger";
 import { useSideBar } from "./hooks/useSideBar";
 
 import styles from "./styles.module.scss";
@@ -16,7 +16,7 @@ const sidebar = {
     },
   }),
   closed: {
-    clipPath: "circle(25px at 55px 55px)",
+    clipPath: "circle(25px at 40px 55px)",
     transition: {
       delay: 0.5,
       type: "spring",
