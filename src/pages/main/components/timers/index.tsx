@@ -11,13 +11,12 @@ import {
   getTimeout,
 } from "@/service/settings";
 
-import { Hotkeys } from "./partials/Hotkeys";
 import { getFormateTime } from "../../helpers/getFormateTime";
 import { useTimers } from "../../hooks/useTimers";
 import { useTimer } from "../../hooks/useTimer";
+import { Animations } from "../../constants";
 
 import styles from "./Timer.module.scss";
-import { Animations } from "../../constants";
 
 const defaultAnimate = {
   whileTap: { scale: 0.95 },

@@ -63,6 +63,8 @@ export const useTimers = ({
     if (e.code !== "Space") {
       return;
     }
+
+    handleToggle();
   };
 
   const handleResetTimers = () => {
@@ -91,12 +93,9 @@ export const useTimers = ({
     if (isPomodoro || isTimeout) {
       dispatch(onSetMenuOpen(false));
       dispatch(onSetSettingsDisable(true));
-      //      const name = isTimeout.current ? StatusList.timeout : StatusList.start;
-      //     invoke("set_icon", { name });
+
       return;
     }
-
-    // invoke("set_icon", { name: StatusList.pause });
 
     dispatch(onSetSettingsDisable(false));
   }, [isPomodoro, isTimeout]);
