@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'RobotoMonoBold';
+    src: url('./assets/fonts/RobotoMonoBold.eot');
+    src: url('./assets/fonts/RobotoMonoBold.eot') format('embedded-opentype'),
+         url('./assets/fonts/RobotoMonoBold.woff2') format('woff2'),
+         url('./assets/fonts/RobotoMonoBold.woff') format('woff'),
+         url('./assets/fonts/RobotoMonoBold.ttf') format('truetype'),
+         url('./assets/fonts/RobotoMonoBold.svg#RobotoMonoBold') format('svg');
+}
+    
+body {
+  background-color: #e5e7eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'RobotoMonoBold';
+}
+
