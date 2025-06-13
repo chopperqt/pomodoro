@@ -31,10 +31,11 @@ export const usePomodoro = () => {
   let intervalId: number | undefined;
 
   const playSound = () => {
-    const sound = new Audio('/public/sound.mp3')
+    const sound = new Audio('/sound.mp3')
 
     sound.play()
   }
+
   const startTimer = useCallback(() => {
     intervalId = setInterval(() => {
       setTimer((prev) => prev - 1);
