@@ -26,6 +26,8 @@ type TimerStatusOption = typeof TimerStatusKey[keyof typeof TimerStatusKey]
 const playSound = () => {
   const sound = new Audio('/sound.mp3')
 
+  sound.volume = 0.75
+
   sound.play()
 }
 
@@ -51,17 +53,16 @@ export const usePomodoro = () => {
   const [timer, setTimer] = useState(POMODORO_TIMER)
 
   const normalizedMinutes = Math.floor(timer / 60 / 1000);
-  const normalizedSeoncds = Math.floor(timer / 1000);
+  const normalizedSecond = Math.floor(timer / 1000);
 
   const minutes = normalizedMinutes < 0 ? 0 : normalizedMinutes;
-  const seconds = normalizedSeoncds < 0 ? 0 : normalizedSeoncds;
+  const seconds = normalizedSecond < 0 ? 0 : normalizedSecond;
 
   const isActive = timerStatus === TimerStatusKey.ACTIVE
   const isPause = timerStatus === TimerStatusKey.PAUSE
   const isInactive = timerStatus === TimerStatusKey.INACTIVE
   const isPomodoro = pomodoroStatus === PomodoroStatusKey.PMODORO
   const isBreak = pomodoroStatus === PomodoroStatusKey.BREAK
-
 
   const startTimer = () => {
     /**
