@@ -4,7 +4,7 @@ import {
   useState,
 } from "react";
 
-const DELAY = 1000;
+const DELAY = 800;
 const BREAK_TIMER = Number(import.meta.env.VITE_BREAK_TIME);
 const POMODORO_TIMER = Number(import.meta.env.VITE_POMODORO_TIME);
 
@@ -50,8 +50,11 @@ export const usePomodoro = () => {
 
   const [timer, setTimer] = useState(POMODORO_TIMER)
 
-  const minutes = Math.floor(timer / 60 / 1000);
-  const seconds = Math.floor(timer / 1000);
+  const normalizedMinutes = Math.floor(timer / 60 / 1000);
+  const normalizedSeoncds = Math.floor(timer / 1000);
+
+  const minutes = normalizedMinutes < 0 ? 0 : normalizedMinutes;
+  const seconds = normalizedSeoncds < 0 ? 0 : normalizedSeoncds;
 
   const isActive = timerStatus === TimerStatusKey.ACTIVE
   const isPause = timerStatus === TimerStatusKey.PAUSE
@@ -76,7 +79,8 @@ export const usePomodoro = () => {
       */
     endTime = Date.now() + (passedTime || time)
 
-    console.log('passedTime:', passedTime / 1000)
+    setTimer(endTime - Date.now())
+
     /**
       * Запуск таймера.
       */
