@@ -135,6 +135,12 @@ export const usePomodoro = () => {
     setPomodoroSatus(PomodoroStatusKey.PMODORO)
   }
 
+  const handleFocusWindow = async () => {
+    await getCurrentWindow().unminimize()
+    await getCurrentWindow().show()
+    await getCurrentWindow().setFocus()
+  }
+
   useEffect(() => {
     if (0 < timer) {
       return
@@ -145,9 +151,8 @@ export const usePomodoro = () => {
     stopTimer()
     playSound()
 
-    getCurrentWindow().show()
-    getCurrentWindow().unminimize()
-    getCurrentWindow().setFocus()
+    handleFocusWindow()
+
   }, [timer])
 
   const handleToggleTimer = () => {
