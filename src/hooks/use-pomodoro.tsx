@@ -1,102 +1,190 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import {
-  useCallback,
   useEffect,
   useState,
 } from "react";
 
-const DEFAULT_SECS = 60;
-const DELAY = 1000;
+const DELAY = 150;
 const BREAK_TIMER = Number(import.meta.env.VITE_BREAK_TIME);
-const POMODORO_TIME = Number(import.meta.env.VITE_POMODORO_TIME);
+const POMODORO_TIMER = Number(import.meta.env.VITE_POMODORO_TIME);
 
 export const PomodoroStatusKey = {
   PMODORO: "pomodoro",
   BREAK: "break",
 } as const
 
+
 export const TimerStatusKey = {
   ACTIVE: "active",
+  PAUSE: "pause",
   INACTIVE: "inactive",
+} as const
+
+type PomodoroStatusOption = typeof PomodoroStatusKey[keyof typeof PomodoroStatusKey]
+type TimerStatusOption = typeof TimerStatusKey[keyof typeof TimerStatusKey]
+
+const playSound = () => {
+  const sound = new Audio('/sound.mp3')
+
+  sound.volume = 0.75
+
+  sound.play()
 }
 
+/**
+ * Идентификатор таймера.
+ */
+let intervalId: number | undefined;
+
+/**
+ * Время окончания таймера.
+ */
+let endTime: number | null = null
+
+/**
+ * Время которое прошло, с момента начала таймера.
+ */
+let passedTime = 0
+
 export const usePomodoro = () => {
-  const [pomodoroStatus, setPomodoroSatus] = useState<typeof PomodoroStatusKey[keyof typeof PomodoroStatusKey]>(PomodoroStatusKey.PMODORO);
-  const [timerStatus, setTimerStatus] = useState<typeof TimerStatusKey[keyof typeof TimerStatusKey]>(TimerStatusKey.INACTIVE);
-  const [timer, setTimer] = useState(POMODORO_TIME);
+  const [pomodoroStatus, setPomodoroSatus] = useState<PomodoroStatusOption>(PomodoroStatusKey.PMODORO);
+  const [timerStatus, setTimerStatus] = useState<TimerStatusOption>(TimerStatusKey.INACTIVE);
 
-  const minutes = Math.floor(timer / DEFAULT_SECS);
-  const seconds = timer % DEFAULT_SECS;
+  const [timer, setTimer] = useState(POMODORO_TIMER)
 
-  let intervalId: number | undefined;
+  const totalSeconds = Math.floor(timer / 1000);
+  const normalizedMinites = Math.floor(totalSeconds / 60);
+  const normalizedSeconds = totalSeconds % 60;
 
-  const playSound = () => {
-    const sound = new Audio('/sound.mp3')
+  const minutes = normalizedMinites < 0 ? 0 : normalizedMinites;
+  const seconds = normalizedSeconds < 0 ? 0 : normalizedSeconds;
 
-    sound.play()
-  }
+  const isActive = timerStatus === TimerStatusKey.ACTIVE
+  const isPause = timerStatus === TimerStatusKey.PAUSE
+  const isInactive = timerStatus === TimerStatusKey.INACTIVE
+  const isPomodoro = pomodoroStatus === PomodoroStatusKey.PMODORO
+  const isBreak = pomodoroStatus === PomodoroStatusKey.BREAK
 
-  const startTimer = useCallback(() => {
+  const startTimer = () => {
+    /**
+      * Обновляет состояние теймера.
+      */
+    setTimerStatus(TimerStatusKey.ACTIVE)
+
+    /**
+     * Определяем, таймер помодоро или таймер перерыва.
+     */
+    const time = isPomodoro ? POMODORO_TIMER : BREAK_TIMER
+
+    /**
+      * Определяем конечное время таймера.
+      */
+    endTime = Date.now() + (passedTime || time)
+
+    setTimer(endTime - Date.now())
+
+    /**
+      * Запуск таймера.
+      */
     intervalId = setInterval(() => {
-      setTimer((prev) => prev - 1);
+      if (!endTime) return
+
+      const remainingTime = endTime - Date.now()
+
+      setTimer(remainingTime)
     }, DELAY);
 
     setTimerStatus(TimerStatusKey.ACTIVE);
-  }, [])
+  }
 
-  const stopTimer = useCallback(() => {
+  const pauseTimer = () => {
+    setTimerStatus(TimerStatusKey.PAUSE)
     clearInterval(intervalId);
-    setTimerStatus(TimerStatusKey.INACTIVE);
-  }, [])
 
-  const isStartPosition = timer === POMODORO_TIME
+    if (!endTime) return
+
+    passedTime = endTime - Date.now()
+  }
+
+  const stopTimer = () => {
+    /**
+      * Выключаем таймер.
+      */
+    clearInterval(intervalId);
+
+    passedTime = 0
+    endTime = null
+
+    /**
+      * Меняем статус на инактивен.
+      */
+    setTimerStatus(TimerStatusKey.INACTIVE);
+
+    /**
+     * Меняем время и режим взависимости от того, какой сейчас стоит режим.
+     */
+
+    if (isPomodoro) {
+      setTimer(BREAK_TIMER)
+      setPomodoroSatus(PomodoroStatusKey.BREAK)
+
+      return
+    }
+
+    setTimer(POMODORO_TIMER)
+    setPomodoroSatus(PomodoroStatusKey.PMODORO)
+  }
+
+  const handleFocusWindow = async () => {
+    await getCurrentWindow().unminimize()
+    await getCurrentWindow().show()
+    await getCurrentWindow().setFocus()
+  }
 
   useEffect(() => {
-    if (timer > 0) {
+    if (0 < timer) {
       return
     }
+
+    endTime = null
 
     stopTimer()
-
-
     playSound()
-    getCurrentWindow().show()
-    getCurrentWindow().unminimize()
-    getCurrentWindow().setFocus()
 
-    if (pomodoroStatus === PomodoroStatusKey.PMODORO) {
-      setPomodoroSatus(PomodoroStatusKey.BREAK);
-      setTimer(BREAK_TIMER);
+    handleFocusWindow()
 
-      return
-    }
-
-    setPomodoroSatus(PomodoroStatusKey.PMODORO);
-    setTimer(POMODORO_TIME);
   }, [timer])
 
-  const handleToggle = () => {
-    if (timerStatus === TimerStatusKey.ACTIVE) {
-      stopTimer();
+  const handleToggleTimer = () => {
+    if (isActive) {
+      pauseTimer()
 
       return
     }
 
-    startTimer();
+    startTimer()
   }
 
   const handleStop = () => {
-    stopTimer()
-    setTimer(POMODORO_TIME)
+    clearInterval(intervalId)
+
+    endTime = null
+    passedTime = 0;
+
+    setTimerStatus(TimerStatusKey.INACTIVE);
+    setPomodoroSatus(PomodoroStatusKey.PMODORO)
+    setTimer(POMODORO_TIMER)
   }
 
   return {
-    isStartPosition,
-    timerStatus,
-    pomodoroStatus,
+    isPomodoro,
+    isBreak,
+    isInactive,
+    isActive,
+    isPause,
     minutes,
     seconds,
-    handleToggle,
+    handleToggleTimer,
     handleStop,
   }
 }

@@ -10,8 +10,6 @@ import {
   StatusKey,
 } from "./components";
 import {
-  PomodoroStatusKey,
-  TimerStatusKey,
   usePomodoro,
 } from "./hooks/use-pomodoro";
 
@@ -22,13 +20,13 @@ const BREAK_TEXT = 'Break Time'
 
 function App() {
   const {
-    isStartPosition,
-    pomodoroStatus,
-    timerStatus,
+    isPomodoro,
+    isPause,
+    isInactive,
     minutes,
     seconds,
     handleStop,
-    handleToggle,
+    handleToggleTimer,
   } = usePomodoro()
 
   // async function greet() {
@@ -36,10 +34,10 @@ function App() {
   // setGreetMsg(await invoke("greet", { name }));
   // }
 
-  const text = pomodoroStatus === PomodoroStatusKey.PMODORO ? POMODORO_TEXT : BREAK_TEXT
-  const icon = timerStatus === TimerStatusKey.INACTIVE ? faPlay : faPause
+  const text = isPomodoro ? POMODORO_TEXT : BREAK_TEXT
 
-  const isEnableStop = timerStatus === TimerStatusKey.ACTIVE || !isStartPosition
+
+  const icon = (isPause || isInactive) ? faPlay : faPause
 
   return (
     <main className="container text-center flex flex-col items-center gap-3">
@@ -53,11 +51,10 @@ function App() {
           icon={faStop}
           onClick={handleStop}
           status={StatusKey.DANGER}
-          isDisabled={!isEnableStop}
         />
         <Button
           icon={icon}
-          onClick={handleToggle}
+          onClick={handleToggleTimer}
         />
       </div>
     </main>
