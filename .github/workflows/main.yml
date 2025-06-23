@@ -53,6 +53,14 @@ jobs:
         with:
           workspaces: './src-tauri -> target'
 
+      # Fix for npm optional dependencies bug on Windows
+      - name: Clean npm install (Windows only)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          if exist node_modules rmdir /s /q node_modules
+          if exist package-lock.json del /f package-lock.json
+          npm install
+          
       - name: install frontend dependencies
         # If you don't have `beforeBuildCommand` configured you may want to build your frontend here too.
         run: npm install # change this to npm or pnpm depending on which one you use.
