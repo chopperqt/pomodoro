@@ -36,7 +36,6 @@ function App() {
 
   const text = isPomodoro ? POMODORO_TEXT : BREAK_TEXT
 
-
   const icon = (isPause || isInactive) ? faPlay : faPause
 
   return (
