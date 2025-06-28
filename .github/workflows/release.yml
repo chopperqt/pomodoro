@@ -27,7 +27,7 @@ jobs:
 
   build-tauri:
     needs: release
-    if: needs.release.outputs.new-release-published == 'true'
+    # if: needs.release.outputs.new-release-published == 'true'
     strategy:
       fail-fast: false
       matrix:
