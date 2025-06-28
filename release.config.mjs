@@ -11,8 +11,8 @@ export default {
       npmPublish: false, // Отключает публикацию в npm, но версию в package.json обновит
     }],
     ["@semantic-release/exec", {
+      verifyConditionsCmd: "./verify.sh",
       prepareCmd: "node scripts/update-tauri-version.js ${nextRelease.version}",
-      publishCmd: "echo publish stage",
     }],
   ]
 };
