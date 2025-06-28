@@ -46,7 +46,7 @@ const playSound = () => {
 /**
  * Идентификатор таймера.
  */
-let intervalId: number | undefined;
+let intervalId: NodeJS.Timeout;
 
 /**
  * Время окончания таймера.
