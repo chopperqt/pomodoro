@@ -1,12 +1,24 @@
 import { getCurrentWindow } from '@tauri-apps/api/window'
 import {
   useEffect,
+  useRef,
   useState,
 } from "react";
+import { useNotification } from './use-notification';
 
 const DELAY = 150;
 const BREAK_TIMER = Number(import.meta.env.VITE_BREAK_TIME);
 const POMODORO_TIMER = Number(import.meta.env.VITE_POMODORO_TIME);
+
+const POMODORO_NOTIFICATION = {
+  title: 'Break coming soon',
+  body: 'Pomodoro will end in 10 seconds',
+}
+
+const BREAK_NOTIFICATION = {
+  title: 'Pomodoro coming soon',
+  body: 'Break will end in 10 seconds',
+}
 
 export const PomodoroStatusKey = {
   PMODORO: "pomodoro",
@@ -47,10 +59,14 @@ let endTime: number | null = null
 let passedTime = 0
 
 export const usePomodoro = () => {
+  const { onSendNotification } = useNotification()
+
   const [pomodoroStatus, setPomodoroSatus] = useState<PomodoroStatusOption>(PomodoroStatusKey.PMODORO);
   const [timerStatus, setTimerStatus] = useState<TimerStatusOption>(TimerStatusKey.INACTIVE);
 
   const [timer, setTimer] = useState(POMODORO_TIMER)
+
+  const isNotificationSended = useRef(false)
 
   const totalSeconds = Math.floor(timer / 1000);
   const normalizedMinites = Math.floor(totalSeconds / 60);
@@ -135,13 +151,36 @@ export const usePomodoro = () => {
     setPomodoroSatus(PomodoroStatusKey.PMODORO)
   }
 
+  const handleSendNotification = async () => {
+    const isWindowFocused = await getCurrentWindow().isFocused()
+
+    if (isWindowFocused) return
+    /**
+        * NOTE: Возможно стоит продумать состояние, когда < 10. И сообщение будет отправлено только одни раз.
+        */
+    if (Math.floor(timer % 60) !== 10) return
+    if (isNotificationSended.current) return
+
+    isNotificationSended.current = true
+
+    const notification = isPomodoro ? POMODORO_NOTIFICATION : BREAK_NOTIFICATION
+
+    onSendNotification(notification)
+  }
+
   const handleFocusWindow = async () => {
+    const isAlreadyFocused = await getCurrentWindow().isFocused()
+
+    if (isAlreadyFocused) return
+
     await getCurrentWindow().unminimize()
     await getCurrentWindow().show()
     await getCurrentWindow().setFocus()
   }
 
   useEffect(() => {
+    handleSendNotification()
+
     if (0 < timer) {
       return
     }
@@ -149,10 +188,12 @@ export const usePomodoro = () => {
     endTime = null
 
     stopTimer()
-    playSound()
 
     handleFocusWindow()
 
+    playSound()
+
+    isNotificationSended.current = false
   }, [timer])
 
   const handleToggleTimer = () => {
