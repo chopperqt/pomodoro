@@ -75,6 +75,7 @@ jobs:
         with:
           args: ${{ matrix.args }}
         env:
+          CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Assets
