@@ -78,7 +78,8 @@ jobs:
           CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Assets
-        run: gh release upload ${{ needs.release.outputs.new-release-version }} ./src-tauri/target/release/bundle/**/* --clobber
+      - name: Upload assets to release
+        run: gh release upload ${{ env.RELEASE_TAG }} ./src-tauri/target/release/bundle/**/* --clobber
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.semantic.outputs.new_release_version }}
